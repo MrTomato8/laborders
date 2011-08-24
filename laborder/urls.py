@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-  
+
 from django.conf.urls.defaults import *
 from laborder.views import hello
 
@@ -14,6 +16,14 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
-    ('^hello/$', hello),
-
+    #главная страница, авторизация, после нее показ 
+    #всего остального или же отказ при неправильном пароле.
+    (r'^/$', hello), 
+    #список наличного оборудования
+    #(r'^available/$', show_avail),
+    #список заказов                   
+    #(r'^orders\$', show_orders),             
+    #новый заказ
+    #(r'^new_order\$'),
+    
 )
