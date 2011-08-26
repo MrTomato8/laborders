@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.http import HttpResponse
+#from django.http import HttpResponse
+#from django.template import Template, Context
+from numpy import array
+#from django.template.loader import get_template
+from django.shortcuts import render_to_response
 
 def hello(request):
-    return HttpResponse("Здравствуй, Мир")
+    lst = range(1, 100)
+    return render_to_response("hello.html", {'list':lst})
+

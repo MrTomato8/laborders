@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Counter{% endblock %}
+
+{% block content %}
+{% include 'page.html' %}
+<br>
+{% for item in list %}
+    item number is {{ item }} <br>
+    {% endfor %} 
+{% endblock %}
