@@ -5,6 +5,13 @@ from django.db import models
 #посмотреть натипы полей в models и расписать нашу примерную 
 #схему по классам.
 
+rights_choices = (
+    ('B', 'Начальник'),
+    ('A', 'Администратор'),
+    ('E', 'Оператор'),
+    ('U', 'Пользователь'),
+    )
+
 status_choices = (
     ('N', 'Новый'), #New
     ('P', 'В рассмотрении'), #Pending
@@ -29,10 +36,7 @@ group_choices = (
     )
 
 class Stuff(models.Model):
-    """                                                                        
-    Класс для списка оборудования,                                             
-    когда-либо заказывавшегося                                                 
-    """
+    """                                                                      Класс для списка оборудования,                                           когда-либо заказывавшегося                                               """
     name_rus = models.CharField(max_length=50)
     name_exact = models.CharField(max_length=50)
     manuf = models.CharField(max_length=50)
@@ -41,13 +45,21 @@ class Stuff(models.Model):
     package = models.IntegerField()
     group = models.CharField(max_length=1, choices=group_choices)
 
+    def __unicode__(self):
+        return "{0} ({1})".format(self.name_rus, self.group)
+
 class Users(models.Model):
-    """                                                                        
-    Класс для списка пользователей                                                 """
+    """
+    Класс для списка пользователей
+    """
     name = models.CharField(max_length=10)
     real_name = models.CharField(max_length=30)
     passwd = models.CharField(max_length=30)
     email = models.EmailField()
+    rights = models.CharField(max_length=1, choices=rights_choices)
+
+    def __unicode__(self):
+        return "%s" % self.real_name
 
 class Order(models.Model):
     """
@@ -63,15 +75,9 @@ class Order(models.Model):
     order_num = models.CharField(max_length=30)
     g_letter = models.BooleanField()
     comment = models.TextField()
-
-class Users(models.Model):
-    """
-    Класс для списка пользователей
-    """
-    name = models.CharField(max_length=10)
-    real_name = models.CharField(max_length=30)
-    passwd = models.CharField(max_length=30)
-    email = models.EmailField()
+    
+    def __unicode__(self):
+        return "Заказ №{0}, {1} [{2}]".format(self.id, self.stuff, self.status)
 
 class Balance(models.Model):
     """
@@ -81,3 +87,5 @@ class Balance(models.Model):
     stuff = models.ForeignKey(Stuff)
     remains = models.IntegerField()
     
+    def __unicode__(self):
+        return "Осталось {0} {1}".format(self.stuff, self.remains)
