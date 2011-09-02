@@ -1,7 +1,7 @@
 from django.contrib import admin
-from laborder.orders.models import Stuff, Users, Order, Balance
+from laborder.orders.models import Stuff, User, Order, Balance
 
 admin.site.register(Stuff)
-admin.site.register(Users)
+admin.site.register(User)
 admin.site.register(Order)
 admin.site.register(Balance)
