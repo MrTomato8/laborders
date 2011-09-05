@@ -1,15 +1,32 @@
 # -*- coding: utf-8 -*-
 
-#from django.http import HttpResponse
-#from django.template import Template, Context
+
 from numpy import array
-#from django.template.loader import get_template
 from django.shortcuts import render_to_response
+from laborder.orders.forms import ContactForm
+from django.core.mail import send_mail
+from django.core.context_processors import csrf
+from django.http import HttpResponseRedirect
 
 def main(request):
     return render_to_response("base.html")
 
 def hello(request):
-    lst = range(1, 100)
-    return render_to_response("hello.html", {'list':lst})
+    lst = request.META.items()
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            send_mail(
+                cd['subject'],
+                cd['message'],
+                cd.get('email', 'piggy@piggy.thruhere.net'),
+                ['piggy@piggy.thruhere.net',],
+                )
+            return HttpResponseRedirect('/hello')
+    else:
+        form = ContactForm()
+    c = {'form':form}
+    c.update(csrf(request))
+    return render_to_response("hello.html", c)
 
