@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-  
 
 from django.conf.urls.defaults import *
-from laborder.views import hello, main
+from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns( 
+    'laborder.views',
     # Example:
     # (r'^laborder/', include('laborder.foo.urls')),
 
@@ -18,8 +19,10 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     #главная страница, авторизация, после нее показ 
     #всего остального или же отказ при неправильном пароле.
-    (r'^hello/$', hello), 
-    (r'^$', main),                   
+    (r'^hello/$', 'hello'), 
+    #или так:
+    (r'^$', 'main'),    
+    #(r'^$', direct_to_template, {'template':'base.html'}),                   
     #список наличного оборудования
     #(r'^available/$', show_avail),
     #список заказов                   
