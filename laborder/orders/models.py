@@ -4,25 +4,29 @@ from django.db import models
 
 #посмотреть натипы полей в models и расписать нашу примерную 
 #схему по классам.
-
+#права пользователей
 rights_choices = (
-    ('B', 'Начальник'),
-    ('A', 'Администратор'),
-    ('E', 'Оператор'),
-    ('U', 'Пользователь'),
+    ('B', 'Начальник'),#умеет одобрять, пишет комментарий и графу, откуда оплата.
+    ('A', 'Администратор'),#не убрать. все может править и удалять
+    ('E', 'Оператор'),#убрать
+    ('U', 'Пользователь'),#видит все заказы, но не видит, кто заказал
     )
 
+# и срочность!!!!1
+
+#статусы заказов
 status_choices = (
     ('N', 'Новый'), #New
-    ('P', 'В рассмотрении'), #Pending
+    ('P', 'В рассмотрении'), #Pending лишнее
     ('A', 'Ободрен'), #Approved
     ('R', 'Отклонен'), #Rejected
-    ('O', 'Ожидание счета'), #waiting for Order
-    ('D', 'Ожидание поставки'), #waiting for Delivery
-    ('R', 'Частично получен'), #partially Received
-    ('C', 'Выполнен'), #Completed
+    ('O', 'Ожидание счета'), #waiting for Order лишнее
+    ('D', 'Ожидание поставки'), #waiting for Delivery лишнее
+    ('R', 'Частично получен'), #partially Received лишнее
+    # и добавить "отложен"
+    ('C', 'Выполнен'), #Completed 
     )
-
+#группы объектов
 group_choices = (
     ("C", "Культуральные"),
     ("P", "Пластик"),
@@ -78,10 +82,11 @@ class Order(models.Model):
     """
     stuff = models.ForeignKey(Stuff, verbose_name="оборудование")
     pieces = models.IntegerField("количество")
-    price_man = models.DecimalField("цена производителя", max_digits=1000, decimal_places=2)
-    price_rus = models.DecimalField("фактическая цена", max_digits=1000, decimal_places=2)
+    price_man = models.DecimalField("цена производителя", max_digits=1000, decimal_places=2)#не обязательно, но с указанием валюты
+    price_rus = models.DecimalField("фактическая цена", max_digits=1000, decimal_places=2)#не обязательно, но с указанием валюты
     order_date = models.DateTimeField("дата заказа", auto_now=True)
     user = models.ForeignKey(User, verbose_name="пользователь")
+    # и срочность!!!!1
     status = models.CharField("статус заказа", max_length=1, choices=status_choices)
     order_num = models.CharField("номер заказа", max_length=30)
     g_letter = models.BooleanField("гарантийное письмо")
