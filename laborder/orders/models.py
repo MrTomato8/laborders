@@ -17,16 +17,16 @@ rights_choices = (
 
 #статусы заказов
 status_choices = (
-    ('N', 'Новый'), #New
-    ('D', 'Отложен'), #Delayed
+    ('N', 'Новое'), #New
+    ('D', 'Отложено'), #Delayed
     #('P', 'В рассмотрении'), #Pending лишнее
-    ('A', 'Одобрен'), #Approved
-    ('R', 'Отклонен'), #Rejected
+    ('A', 'Одобрено'), #Approved
+    ('R', 'Отклонено'), #Rejected
     #('O', 'Ожидание счета'), #waiting for Order лишнее
     #('D', 'Ожидание поставки'), #waiting for Delivery лишнее
     #('R', 'Частично получен'), #partially Received лишнее
     # и добавить "отложен"
-    ('C', 'Выполнен'), #Completed 
+    ('C', 'Выполнено'), #Completed 
     )
 #группы объектов
 group_choices = (
