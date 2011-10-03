@@ -49,9 +49,9 @@ class Stuff(models.Model):
     name_rus = models.CharField("название", max_length=50)
     name_exact = models.CharField("точное название", max_length=50)
     manuf = models.CharField("производитель", max_length=50)
-    man_site = models.URLField("сайт производителя")
+    man_site = models.URLField("сайт производителя", blank=True, null=True)
     cat_num = models.CharField("номер в каталоге", max_length=15, blank=True, null=True)
-    package = models.IntegerField("фасовка")
+    package = models.CharField("фасовка", max_length=10, blank=True, null=True)
     group = models.CharField("группа", max_length=1, choices=group_choices)
     
     class Meta:
