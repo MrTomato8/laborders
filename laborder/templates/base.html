@@ -17,16 +17,16 @@
 {% block content %}
 <p>{{ content }}<p>
 {% endblock %}
-
+<ul>
 {% for item in stuff %}
-<li>Назв.:{{ item.name_rus }}, точное: {{ item.name_exact }}, произв.: {{ item.manuf }}, группа: {{ item.get_stgroup_display }} </li>
+<li>{{ forloop.counter }} Назв.:{{ item.name_rus }}, точное: {{ item.name_exact }}, произв.: {{ item.manuf }}, группа: {{ item.get_stgroup_display }} </li>
 {% endfor %}
-
+</ul>
 {% block footer %}
 <hr>This is a footer
 {% endblock %}
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Tue Oct  4 22:07:25 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Tue Oct  4 22:13:37 MSD 2011 <!-- hhmts end -->
 </body> </html>
