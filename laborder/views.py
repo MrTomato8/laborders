@@ -7,9 +7,14 @@ from laborder.orders.forms import ContactForm
 from django.core.mail import send_mail
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
+from laborder.orders.models import Stuff
 
 def main(request):
-    return render_to_response("base.html")
+    return render_to_response("base.html", {'page_name':u'Начальная страница'})
+
+def wishes(request):
+    objs = Stuff.objects.order_by('stgroup')
+    return render_to_response("base.html", {'stuff':objs, 'page_name':u'Список оборудования'})
 
 def hello(request):
     lst = request.META.items()

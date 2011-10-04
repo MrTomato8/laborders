@@ -30,15 +30,15 @@ status_choices = (
     )
 #группы объектов
 group_choices = (
-    ("C", "Культуральные"),
-    ("P", "Пластик"),
-    ("G", "Общелабораторные"),
-    ("S", "Соли"),
-    ("I", "ИФА АВ"),
-    ("W", "Гели Вестерн"),
-    ("O", "Канцелярия"),
-    ("F", "Феремнты, наборы и т.д."),
-    ("U", "Upd"),
+    ("C", u"Культуральные"),
+    ("P", u"Пластик"),
+    ("G", u"Общелабораторные"),
+    ("S", u"Соли"),
+    ("I", u"ИФА АВ"),
+    ("W", u"Гели Вестерн"),
+    ("O", u"Канцелярия"),
+    ("F", u"Феремнты, наборы и т.д."),
+    ("U", u"Upd"),
     )
 
 class Stuff(models.Model):
@@ -46,20 +46,21 @@ class Stuff(models.Model):
     Класс для списка оборудования,
     когда-либо заказывавшегося
     """
-    name_rus = models.CharField("название", max_length=50)
-    name_exact = models.CharField("точное название", max_length=50)
-    manuf = models.CharField("производитель", max_length=50)
+    name_rus = models.CharField("название", max_length=300)
+    name_exact = models.CharField("точное название", max_length=200)
+    manuf = models.CharField("производитель", max_length=100)
     man_site = models.URLField("сайт производителя", blank=True, null=True)
-    cat_num = models.CharField("номер в каталоге", max_length=15, blank=True, null=True)
-    package = models.CharField("фасовка", max_length=10, blank=True, null=True)
-    group = models.CharField("группа", max_length=1, choices=group_choices)
+    cat_num = models.CharField("номер в каталоге", max_length=200, blank=True, null=True)
+    package = models.CharField("фасовка", max_length=100, blank=True, null=True)
+    stgroup = models.CharField("группа", max_length=1, choices=group_choices)
     
     class Meta:
         verbose_name = "оборудование"
         verbose_name_plural = "оборудование"
 
     def __unicode__(self):
-        return "{0} ({1})".format(self.name_rus, self.group)
+        #get_FOO_display() - для отображения значений полей с выбором
+        return u"{0} ({1})".format(self.name_rus, self.get_stgroup_display())
 
 class Wish(models.Model):
     """
@@ -80,6 +81,6 @@ class Wish(models.Model):
         verbose_name_plural = 'пожелания'
 
     def __unicode__(self):
-        return "Пожелание №{0}, {1} [{2}]".format(self.id, self.stuff, self.status)
+        return u"Пожелание №{0}, {1} [{2}]".format(self.id, self.stuff, self.status)
 
 

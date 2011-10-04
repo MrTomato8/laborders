@@ -10,7 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns( 
     'laborder.views',
     # Example:
-    # (r'^laborder/', include('laborder.foo.urls')),
+    (r'^wishes/', 'wishes'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
