@@ -10,8 +10,8 @@
 <h1> {{ page_name }}</h1>
 {% endblock %}
 
-{% if username %}
-Здрасте,{{ username }}!
+{% if user %}
+Здрасте, {{ user.username }}!
 {% endif %}
 
 {% block content %}
@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% for item in stuff %}
-<li>{{ item.name_rus }}, {{ item.name_exact }}, {{ item.manuf }} </li>
+<li>Назв.:{{ item.name_rus }}, точное: {{ item.name_exact }}, произв.: {{ item.manuf }}, группа: {{ item.get_stgroup_display }} </li>
 {% endfor %}
 
 {% block footer %}
@@ -28,5 +28,5 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Tue Oct  4 16:40:05 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Tue Oct  4 22:07:25 MSD 2011 <!-- hhmts end -->
 </body> </html>

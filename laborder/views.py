@@ -32,7 +32,7 @@ def main(request, template_name='login.html'):
 
 def wishes(request):
     objs = Stuff.objects.order_by('stgroup')
-    return render_to_response("base.html", {'stuff':objs, 'page_name':u'Список оборудования', 'username':request.user.username})
+    return render_to_response("base.html", {'stuff':objs, 'page_name':u'Список оборудования', 'user':request.user})
 
 def hello(request):
     lst = request.META.items()
