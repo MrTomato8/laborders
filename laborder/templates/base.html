@@ -6,6 +6,10 @@
 </head>
 <body>
 
+{% if user.is_authenticated %}
+<a href='/logout'>logout</a>
+{% endif %}
+
 {% block title %}
 <h1> {{ page_name }}</h1>
 {% endblock %}
@@ -28,5 +32,5 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Wed Oct  5 13:22:05 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Wed Oct  5 20:39:15 MSD 2011 <!-- hhmts end -->
 </body> </html>

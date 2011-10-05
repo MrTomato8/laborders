@@ -3,7 +3,7 @@
 {% block content %}
 
   {% if login_error %}
-    <p class="error">Попробуйте еще раз...</p>
+    <p class="error">{{ login_error }}</p>
   {% endif %}
 
   <form action='.' method='post'>
