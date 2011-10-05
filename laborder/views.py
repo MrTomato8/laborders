@@ -14,6 +14,7 @@ def main(request, template_name='login.html'):
     c = {}
     c.update(csrf(request))
     if 'username' in request.POST:
+        #если передаем данные из формы
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
@@ -27,8 +28,20 @@ def main(request, template_name='login.html'):
             c.update({'login_error':True})
             return render_to_response("login.html", c)
     else:
-        return render_to_response('login.html', c)
-        
+        #в противонм случае
+        if request.user.is_authenticated():
+            #если пользователь залогинен
+            #то перенаправляем его куда надо
+            return HttpResponseRedirect("/wishes")
+        else:
+            #если не залогинен, предлагаем это сделать. 
+            return render_to_response('login.html', c)
+
+def logout(request):
+    auth.logout(request)
+    #c = {}
+    #c.update(csrf(request))
+    return HttpResponseRedirect('/')#render_to_response('login.html', c)
 
 def wishes(request):
     objs = Stuff.objects.order_by('stgroup')

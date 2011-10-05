@@ -19,7 +19,7 @@
 {% endblock %}
 <ul>
 {% for item in stuff %}
-<li>{{ forloop.counter }} Назв.:{{ item.name_rus }}, точное: {{ item.name_exact }}, произв.: {{ item.manuf }}, группа: {{ item.get_stgroup_display }} </li>
+<li>{{ forloop.counter }} Назв.:{{ item.name_rus }}, точное: {{ item.name_exact }}, произв.: {{ item.manuf }}, группа: {{ item.get_stgroup_display }} {% if user.is_staff %} Править {% endif %}</li>
 {% endfor %}
 </ul>
 {% block footer %}
@@ -28,5 +28,5 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Tue Oct  4 22:13:37 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Wed Oct  5 13:22:05 MSD 2011 <!-- hhmts end -->
 </body> </html>
