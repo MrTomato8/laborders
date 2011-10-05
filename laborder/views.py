@@ -45,7 +45,7 @@ def logout(request):
     #c.update(csrf(request))
     return HttpResponseRedirect('/')#render_to_response('login.html', c)
 
-@login_required
+@login_required()
 def wishes(request):
     #if request.user.is_authenticated():
     objs = Stuff.objects.order_by('stgroup')
