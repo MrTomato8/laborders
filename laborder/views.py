@@ -7,7 +7,7 @@ from laborder.orders.forms import ContactForm
 from django.core.mail import send_mail
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
-from laborder.orders.models import Stuff
+from laborder.orders.models import Stuff, Wish
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
@@ -48,8 +48,8 @@ def logout(request):
 @login_required()
 def wishes(request):
     #if request.user.is_authenticated():
-    objs = Stuff.objects.order_by('stgroup')
-    return render_to_response("base.html", {'stuff':objs, 'page_name':u'Список оборудования', 'user':request.user})
+    objs = Wish.objects.all()
+    return render_to_response("base.html", {'wishes':objs, 'page_name':u'Я хочу... Чтобы гоблины пришли и забрали тебя!', 'user':request.user})
     #else:
     #    return HttpResponseRedirect('/')
 

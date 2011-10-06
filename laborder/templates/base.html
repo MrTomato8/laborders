@@ -6,24 +6,32 @@
 </head>
 <body>
 
+{% if user %}
+Здрасте, {{ user.username }}!
+{% endif %}
+
 {% if user.is_authenticated %}
-<a href='/logout'>logout</a>
+<a href='/logout'>[logout]</a>
 {% endif %}
 
 {% block title %}
 <h1> {{ page_name }}</h1>
 {% endblock %}
 
-{% if user %}
-Здрасте, {{ user.username }}!
-{% endif %}
-
 {% block content %}
 <p>{{ content }}<p>
 {% endblock %}
 <ul>
-{% for item in stuff %}
-<li>{{ forloop.counter }} Назв.:{{ item.name_rus }}, точное: {{ item.name_exact }}, произв.: {{ item.manuf }}, группа: {{ item.get_stgroup_display }} {% if user.is_staff %} Править {% endif %}</li>
+{% for item in wishes %}
+<li>{{ forloop.counter }}
+{% if user == item.user %}
+  Мне
+{% else %}
+  Кому-то еще
+{% endif %}
+нужны {{ item.pieces }} шт {{ item.stuff }}, {{ item.price_man }},
+  {{ item.order_date|date:'d/m/y' }}, {% if item.urgent %} Срочно!{% endif %}
+  {{ item.get_status_display }} {% if user.is_staff %} Править {% endif %}</li>
 {% endfor %}
 </ul>
 {% block footer %}
@@ -32,5 +40,5 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Wed Oct  5 20:39:15 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Thu Oct  6 16:55:30 MSD 2011 <!-- hhmts end -->
 </body> </html>
