@@ -25,11 +25,12 @@
 {% for item in wishes %}
 <li>{{ forloop.counter }}
 {% if user == item.user %}
-  Мне
+  Я хочу
 {% else %}
-  Кому-то еще
+  Кто-то еще хочет 
 {% endif %}
-нужны {{ item.pieces }} шт {{ item.stuff }}, {{ item.price_man }},
+  {{ item.stuff.name_rus }}, 
+  {{ item.pieces }} x {{item.stuff.package }} по цене {{ item.price_man }},
   {{ item.order_date|date:'d/m/y' }}, {% if item.urgent %} Срочно!{% endif %}
   {{ item.get_status_display }} {% if user.is_staff %} Править {% endif %}</li>
 {% endfor %}
@@ -40,5 +41,5 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Thu Oct  6 16:55:30 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Fri Oct  7 17:25:07 MSD 2011 <!-- hhmts end -->
 </body> </html>

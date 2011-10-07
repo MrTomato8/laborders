@@ -38,7 +38,7 @@ group_choices = (
     ("W", u"Гели Вестерн"),
     ("O", u"Канцелярия"),
     ("F", u"Феремнты, наборы и т.д."),
-    ("U", u"Upd"),
+    ("U", u"Остальное"),
     )
 
 class Stuff(models.Model):
@@ -52,6 +52,7 @@ class Stuff(models.Model):
     man_site = models.URLField("сайт производителя", blank=True, null=True)
     cat_num = models.CharField("номер в каталоге", max_length=200, blank=True, null=True)
     package = models.CharField("фасовка", max_length=100, blank=True, null=True)
+    measure = models.CharField("ед. изм.", max_length=5, blank=True, null=True)
     stgroup = models.CharField("группа", max_length=1, choices=group_choices)
     
     class Meta:
@@ -60,7 +61,7 @@ class Stuff(models.Model):
 
     def __unicode__(self):
         #get_FOO_display() - для отображения значений полей с выбором
-        return u"{0} ({1})".format(self.name_rus, self.get_stgroup_display())
+        return u"{0} ({1})".format(self.name_rus, self.package)
 
 class Wish(models.Model):
     """
