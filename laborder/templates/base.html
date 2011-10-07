@@ -30,7 +30,7 @@
   Кто-то еще хочет 
 {% endif %}
   {{ item.stuff.name_rus }}, 
-  {{ item.pieces }} x {{item.stuff.package }} по цене {{ item.price_man }},
+  {{ item.pieces }} x {{item.stuff.package }} по цене {{ item.price_man }} {{ item.currency_man }}, на сумму {{ item.total }} {{ item.currency_man }}
   {{ item.order_date|date:'d/m/y' }}, {% if item.urgent %} Срочно!{% endif %}
   {{ item.get_status_display }} {% if user.is_staff %} Править {% endif %}</li>
 {% endfor %}
@@ -41,5 +41,5 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Fri Oct  7 17:25:07 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Fri Oct  7 18:47:59 MSD 2011 <!-- hhmts end -->
 </body> </html>

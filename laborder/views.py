@@ -49,6 +49,7 @@ def logout(request):
 def wishes(request):
     #if request.user.is_authenticated():
     objs = Wish.objects.all()
+    
     return render_to_response("base.html", {'wishes':objs, 'page_name':u'Я хочу... Чтобы гоблины пришли и забрали тебя!', 'user':request.user})
     #else:
     #    return HttpResponseRedirect('/')

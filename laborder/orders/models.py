@@ -67,16 +67,20 @@ class Wish(models.Model):
     """
     Класс для пожеланий
     """
+
     stuff = models.ForeignKey(Stuff, verbose_name="оборудование")
     pieces = models.IntegerField("количество")
-    price_man = models.DecimalField("цена производителя", max_digits=1000, decimal_places=2, blank=True, null=True)#не обязательно, но с указанием валюты
-    price_rus = models.DecimalField("фактическая цена", max_digits=1000, decimal_places=2, blank=True, null=True)#не обязательно, но с указанием валюты
+    price_man = models.DecimalField("цена производителя", max_digits=1000, decimal_places=2, blank=True, null=True)
+    currency_man = models.CharField("валюта производителя", max_length=3, default='RUR')
+    price_rus = models.DecimalField("фактическая цена", max_digits=1000, decimal_places=2, blank=True, null=True)
+    currency_rus = models.CharField("валюта фактическая", max_length=3, default='RUR')
     order_date = models.DateTimeField("дата заказа", auto_now=True)
     user = models.ForeignKey(User, verbose_name="пользователь")
     urgent = models.BooleanField("срочно")
     status = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='N')
     comment = models.TextField("комментарий")
-    
+    def total(self):
+        return self.price_man * self.pieces
     class Meta:
         verbose_name = 'пожелание'
         verbose_name_plural = 'пожелания'
