@@ -21,25 +21,32 @@
 {% block content %}
 <p>{{ content }}<p>
 {% endblock %}
+
 <ul>
-{% for item in wishes %}
-<li>{{ forloop.counter }}
-{% if user == item.user %}
+  {% for item in wishes %}
+  <li>
   Я хочу
-{% else %}
-  Кто-то еще хочет 
-{% endif %}
   {{ item.stuff.name_rus }}, 
   {{ item.pieces }} x {{item.stuff.package }} по цене {{ item.price_man }} {{ item.currency_man }}, на сумму {{ item.total }} {{ item.currency_man }}
   {{ item.order_date|date:'d/m/y' }}, {% if item.urgent %} Срочно!{% endif %}
   {{ item.get_status_display }} {% if user.is_staff %} Править {% endif %}</li>
-{% endfor %}
+  {% endfor %}
+  
+  {% for item in other_wishes %}
+    <li>
+    Кто-то хочет
+    {{ item.stuff.name_rus }},
+    {{ item.pieces }} x {{item.stuff.package }} по цене {{ item.price_man }} {{ item.currency_man }}, на сумму {{ item.total }} {{ item.currency_man }}
+    {{ item.order_date|date:'d/m/y' }}, {% if item.urgent %} Срочно!{% endif %}
+    {{ item.get_status_display }} {% if user.is_staff %} Править {% endif %}</li>
+    {% endfor %}
 </ul>
+
 {% block footer %}
 <hr>This is a footer
 {% endblock %}
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Fri Oct  7 18:47:59 MSD 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Tue Oct 11 15:09:38 MSK 2011 <!-- hhmts end -->
 </body> </html>

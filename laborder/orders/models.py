@@ -79,12 +79,13 @@ class Wish(models.Model):
     urgent = models.BooleanField("срочно")
     status = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='N')
     comment = models.TextField("комментарий")
+
     def total(self):
         return self.price_man * self.pieces
     class Meta:
         verbose_name = 'пожелание'
         verbose_name_plural = 'пожелания'
-        ordering = ['status', 'urgent']
+        ordering = ['status', '-urgent']
 
     def __unicode__(self):
         return u"Пожелание №{0}, {1} [{2}]".format(self.id, self.stuff, self.get_status_display())

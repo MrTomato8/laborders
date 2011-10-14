@@ -41,18 +41,15 @@ def main(request, template_name='login.html'):
 
 def logout(request):
     auth.logout(request)
-    #c = {}
-    #c.update(csrf(request))
-    return HttpResponseRedirect('/')#render_to_response('login.html', c)
+    return HttpResponseRedirect('/')
 
 @login_required()
 def wishes(request):
-    #if request.user.is_authenticated():
-    objs = Wish.objects.all()
+    wish_user = Wish.objects.filter(user=request.user.id)
+    wish_other = Wish.objects.exclude(user=request.user.id)
     
-    return render_to_response("base.html", {'wishes':objs, 'page_name':u'Я хочу... Чтобы гоблины пришли и забрали тебя!', 'user':request.user})
-    #else:
-    #    return HttpResponseRedirect('/')
+    return render_to_response("base.html", {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Я хочу... Чтобы гоблины пришли и забрали тебя!', 'user':request.user})
+
 
 def hello(request):
     lst = request.META.items()
