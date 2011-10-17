@@ -134,7 +134,7 @@ ALTER SEQUENCE auth_message_id_seq OWNED BY auth_message.id;
 -- Name: auth_message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('auth_message_id_seq', 8, true);
+SELECT pg_catalog.setval('auth_message_id_seq', 11, true);
 
 
 --
@@ -266,7 +266,7 @@ ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('auth_user_id_seq', 2, true);
+SELECT pg_catalog.setval('auth_user_id_seq', 3, true);
 
 
 --
@@ -354,7 +354,7 @@ ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 8, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 11, true);
 
 
 --
@@ -507,7 +507,7 @@ ALTER SEQUENCE orders_wish_id_seq OWNED BY orders_wish.id;
 -- Name: orders_wish_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('orders_wish_id_seq', 6, true);
+SELECT pg_catalog.setval('orders_wish_id_seq', 7, true);
 
 
 --
@@ -651,8 +651,9 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY auth_user (id, username, first_name, last_name, email, password, is_staff, is_active, is_superuser, last_login, date_joined) FROM stdin;
-2	user				sha1$a10b3$63e1d14cbd178e9fcc7c84b4c2b311bccc0cefd2	f	t	f	2011-10-06 20:27:14.479546+04	2011-10-05 13:18:56.141442+04
-1	annndrey			gontchar@gmail.com	sha1$3d356$f334b5efdbd12ee80f3ea083f8c83f17e7bcd772	t	t	t	2011-10-07 16:19:12.172821+04	2011-10-03 14:49:49.923384+04
+3	guest				sha1$e0e9d$abe2e7fcf9408f235344a2ced961ab09dd9b79bc	f	t	f	2011-10-17 15:42:13.124074+04	2011-10-07 22:32:26.527031+04
+2	user				sha1$a10b3$63e1d14cbd178e9fcc7c84b4c2b311bccc0cefd2	f	t	f	2011-10-17 16:11:22.572778+04	2011-10-05 13:18:56.141442+04
+1	annndrey			gontchar@gmail.com	sha1$3d356$f334b5efdbd12ee80f3ea083f8c83f17e7bcd772	t	t	t	2011-10-17 20:03:56.707535+04	2011-10-03 14:49:49.923384+04
 \.
 
 
@@ -685,6 +686,9 @@ COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, obj
 6	2011-10-06 16:46:53.210208+04	1	8	4	Пожелание №4, этанол (Соли) [Новое]	1	
 7	2011-10-07 17:20:53.547647+04	1	8	5	Пожелание №5, L-глутамин (Культуральные) [Новое]	1	
 8	2011-10-07 17:24:24.38848+04	1	8	6	Пожелание №6, Гентамицин (10 x 10mL) [Новое]	1	
+9	2011-10-07 22:32:26.575946+04	1	3	3	guest	1	
+10	2011-10-07 22:32:59.10737+04	1	8	7	Пожелание №7, среда культуральная DMEM (0,5 л) [Новое]	1	
+11	2011-10-11 15:18:06.111734+04	1	8	7	Пожелание №7, среда культуральная DMEM (0,5 л) [Новое]	3	
 \.
 
 
@@ -711,16 +715,20 @@ COPY django_content_type (id, name, app_label, model) FROM stdin;
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
 7fbe9b144a8ec8698347f51c2a3f41e3	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-17 17:17:09.498686+04
+0242e3b124b55a56afefd3167439b239	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LmYzNTk4MzVmNTVmM2I5NDk4NmQx\nODc4NTk5ODA2Yjlm\n	2011-10-27 23:19:03.140427+04
 1a356f7c4a41c73e44059a5b452eeab0	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwJ1LjlkODZmYmUyYzdhYTFlZDg3Njdj\nYzYxODgxNDgyZjVj\n	2011-10-20 20:27:14.490401+04
 c31dbf85a9acfc030aff477bde622e2a	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwJ1LjlkODZmYmUyYzdhYTFlZDg3Njdj\nYzYxODgxNDgyZjVj\n	2011-10-19 23:25:54.367541+04
 065e2a157a8a4ef2a16e2cc1f0ed8755	gAJ9cQEoVQ1fYXV0aF91c2VyX2lkcQJLAVUSX2F1dGhfdXNlcl9iYWNrZW5kcQNVKWRqYW5nby5j\nb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kcQR1LjE1ZDc3NmYxNWI5YjRhODM2ZmNl\nYmRjMTA4NDVhOTFl\n	2011-10-18 16:46:34.134354+04
 0acf9cbf9e5d5b974546632ce6d7f711	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-18 19:31:26.527051+04
 75f88685a6d78de124671b703632fcf4	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-18 22:03:04.306278+04
-2f04c4a34fff7fc7457fc63c21c4525e	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-21 16:19:12.216736+04
 8369da9c2e8eab8db45bc48c7b363392	gAJ9cQEoVQ1fYXV0aF91c2VyX2lkcQJLAVUSX2F1dGhfdXNlcl9iYWNrZW5kcQNVKWRqYW5nby5j\nb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kcQR1LjE1ZDc3NmYxNWI5YjRhODM2ZmNl\nYmRjMTA4NDVhOTFl\n	2011-10-19 13:19:38.630425+04
+94c3fd153732942871ad611ac057758b	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-21 20:28:05.636372+04
 a9ce117db0265233c82ad878aa69a351	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-20 15:51:08.21535+04
+6d96a966d7dd0dcc5f35c11e79631eb3	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-22 00:45:43.202849+04
 8aff405fba3569907c98b39d4a9050aa	gAJ9cQEuZjllZGI1OGM5MzMwMWExYmIzYmUxYjgwYWFjNGEwOWE=\n	2011-10-19 20:49:28.308155+04
 1ee465016cd98eba86bfe47d5570c019	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-19 23:24:39.800609+04
+06ae1c34f8b0dfc8bad16b04647afc54	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwJ1LjlkODZmYmUyYzdhYTFlZDg3Njdj\nYzYxODgxNDgyZjVj\n	2011-10-31 16:11:22.581272+04
+3d3a91669979307376a28cf07304e3b7	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-31 20:03:56.768957+04
 \.
 
 
