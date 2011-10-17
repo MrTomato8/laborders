@@ -22,25 +22,41 @@
 <p>{{ content }}<p>
 {% endblock %}
 
-<ul>
+<table>
   {% for item in wishes %}
-  <li>
-  Я хочу
-  {{ item.stuff.name_rus }}, 
-  {{ item.pieces }} x {{item.stuff.package }} по цене {{ item.price_man }} {{ item.currency_man }}, на сумму {{ item.total }} {{ item.currency_man }}
-  {{ item.order_date|date:'d/m/y' }}, {% if item.urgent %} Срочно!{% endif %}
-  {{ item.get_status_display }} {% if user.is_staff %} Править {% endif %}</li>
+  <tr>
+    <td>{{ user.username }}</td>
+    <td>{{ item.stuff.name_rus }} </td>
+    <td>{{ item.pieces }}</td>
+    <td>{{item.stuff.package }}</td>
+    <td>{{ item.price_man }}</td>
+    <td>{{ item.currency_man }}</td>
+    <td>{{ item.total }}</td>
+    <td>{{ item.currency_man }}</td>
+    <td>{{ item.order_date|date:'d/m/y' }}</td>
+    <td>{% if item.urgent %} Срочно!{% endif %}</td>
+    <td>{{ item.get_status_display }}</td>
+    <td>{% if user == item.user %} Править {% endif %}</td>
+  </tr>
   {% endfor %}
   
   {% for item in other_wishes %}
-    <li>
-    Кто-то хочет
-    {{ item.stuff.name_rus }},
-    {{ item.pieces }} x {{item.stuff.package }} по цене {{ item.price_man }} {{ item.currency_man }}, на сумму {{ item.total }} {{ item.currency_man }}
-    {{ item.order_date|date:'d/m/y' }}, {% if item.urgent %} Срочно!{% endif %}
-    {{ item.get_status_display }} {% if user.is_staff %} Править {% endif %}</li>
+  <tr>
+    <td>{{ item.user.username }}</td>
+    <td>{{ item.stuff.name_rus }}</td>
+    <td>{{ item.pieces }}</td>
+    <td>{{item.stuff.package }}</td>
+    <td>{{ item.price_man }}</td>
+    <td>{{ item.currency_man }}</td>
+    <td>{{ item.total }}</td>
+    <td>{{ item.currency_man }}</td>
+    <td>{{ item.order_date|date:'d/m/y' }}</td>
+    <td>{% if item.urgent %} Срочно!{% endif %}</td>
+    <td>{{ item.get_status_display }}</td>
+    <td>{% if user.is_staff %} Править {% endif %}</td>
+  </tr>
     {% endfor %}
-</ul>
+</table>
 
 {% block footer %}
 <hr>This is a footer
@@ -48,5 +64,5 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Tue Oct 11 15:09:38 MSK 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Mon Oct 17 15:44:21 MSK 2011 <!-- hhmts end -->
 </body> </html>
