@@ -21,18 +21,29 @@
 {% block content %}
 <p>{{ content }}<p>
 {% endblock %}
-
+{% if user.is_authenticated %}
 <table>
+    <tr>
+      <td>Имя пользователя</td>
+      <td>Заказ</td>
+      <td>Количество</td>
+      <td>Фасовка</td>
+      <td>Цена за ед.</td>
+      <td>Всего</td>
+      <td>Дата заказа</td>
+      <td>Срочность</td>
+      <td>Статус</td>
+      <td></td>
+    </tr>
+							
   {% for item in wishes %}
   <tr>
     <td>{{ user.username }}</td>
     <td>{{ item.stuff.name_rus }} </td>
     <td>{{ item.pieces }}</td>
     <td>{{item.stuff.package }}</td>
-    <td>{{ item.price_man }}</td>
-    <td>{{ item.currency_man }}</td>
-    <td>{{ item.total }}</td>
-    <td>{{ item.currency_man }}</td>
+    <td>{{ item.price_man }} {{ item.currency_man }}</td>
+    <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'d/m/y' }}</td>
     <td>{% if item.urgent %} Срочно!{% endif %}</td>
     <td>{{ item.get_status_display }}</td>
@@ -42,14 +53,12 @@
   
   {% for item in other_wishes %}
   <tr>
-    <td>{{ item.user.username }}</td>
+    <td>{% if user.is_staff %} {{ item.user.username }} {% else %} XXX {% endif %}</td>
     <td>{{ item.stuff.name_rus }}</td>
     <td>{{ item.pieces }}</td>
     <td>{{item.stuff.package }}</td>
-    <td>{{ item.price_man }}</td>
-    <td>{{ item.currency_man }}</td>
-    <td>{{ item.total }}</td>
-    <td>{{ item.currency_man }}</td>
+    <td>{{ item.price_man }} {{ item.currency_man }}</td>
+    <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'d/m/y' }}</td>
     <td>{% if item.urgent %} Срочно!{% endif %}</td>
     <td>{{ item.get_status_display }}</td>
@@ -57,12 +66,12 @@
   </tr>
     {% endfor %}
 </table>
-
+{% endif %}
 {% block footer %}
 <hr>This is a footer
 {% endblock %}
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Mon Oct 17 15:44:21 MSK 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Mon Oct 17 16:13:14 MSK 2011 <!-- hhmts end -->
 </body> </html>
