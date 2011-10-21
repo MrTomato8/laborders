@@ -50,6 +50,18 @@ def wishes(request):
     
     return render_to_response("base.html", {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Я хочу... Чтобы гоблины пришли и забрали тебя!', 'user':request.user})
 
+@login_required()
+def new(request):
+    #
+    pass
+
+@login_required()
+def delete(request, num):
+    pass
+
+@login_required()
+def edit(request, num):
+    pass
 
 def hello(request):
     lst = request.META.items()

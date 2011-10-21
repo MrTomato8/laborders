@@ -21,6 +21,11 @@
 {% block content %}
 <p>{{ content }}<p>
 {% endblock %}
+
+
+<a href='/new'>Добавить</a>
+
+
 {% if user.is_authenticated %}
 <table>
     <tr>
@@ -47,7 +52,8 @@
     <td>{{ item.order_date|date:'d/m/y' }}</td>
     <td>{% if item.urgent %} Срочно!{% endif %}</td>
     <td>{{ item.get_status_display }}</td>
-    <td>{% if user == item.user %} Править {% endif %}</td>
+    <td>{% if user == item.user %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
+    <td>{% if user == item.user %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
   </tr>
   {% endfor %}
   
@@ -62,7 +68,8 @@
     <td>{{ item.order_date|date:'d/m/y' }}</td>
     <td>{% if item.urgent %} Срочно!{% endif %}</td>
     <td>{{ item.get_status_display }}</td>
-    <td>{% if user.is_staff %} Править {% endif %}</td>
+    <td>{% if user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
+    <td>{% if user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
   </tr>
     {% endfor %}
 </table>

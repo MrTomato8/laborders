@@ -14,7 +14,9 @@ urlpatterns = patterns(
     (r'^logout/', 'logout'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    (r'^new/', 'new'),
+    (r'^delete/(?P<num>\d+)/$', 'delete'),
+    (r'^edit/(?P<num>\d+)/$', 'edit'),
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     #главная страница, авторизация, после нее показ 
