@@ -52,11 +52,15 @@ def wishes(request):
 
 @login_required()
 def new(request):
-    #
+    #add object
+    #return httpredirect /wishes
+    #как-то так
+    #HttpResponseRedirect(reverse('arch-summary', args=[1945]))
     pass
 
 @login_required()
 def delete(request, num):
+    #add object                                                                                                                                                                                                   #return httpredirect /wishes 
     pass
 
 @login_required()
