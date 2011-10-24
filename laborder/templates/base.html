@@ -2,9 +2,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title></title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<title>Стол заказов</title>
 </head>
 <body>
+
+<div class='fl_left'> 
+  <img src='/static/picts/pigeon.png'>
+</div>
 
 {% if user %}
 Здрасте, {{ user.username }}!
@@ -22,8 +27,9 @@
 <p>{{ content }}<p>
 {% endblock %}
 
-
+{% if user.is_authenticated %}
 <a href='/new'>Добавить</a>
+{% endif %}
 
 
 {% if user.is_authenticated %}
@@ -74,6 +80,8 @@
     {% endfor %}
 </table>
 {% endif %}
+
+<div class='footer'>
 {% block footer %}
 <hr>This is a footer
 {% endblock %}
@@ -81,4 +89,5 @@
 <hr>
 <address></address>
 <!-- hhmts start -->Last modified: Mon Oct 17 16:13:14 MSK 2011 <!-- hhmts end -->
+</div>
 </body> </html>

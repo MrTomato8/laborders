@@ -2,6 +2,12 @@
 
 from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
+from django.conf import settings
+import os
+
+from laborder.settings import DEBUG
+
+site_media = os.path.join(os.path.dirname(__file__), 'media')
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -31,5 +37,11 @@ urlpatterns = patterns(
     #(r'^orders\$', show_orders),             
     #новый заказ
     #(r'^new_order\$'),
-    
-)
+    )
+
+if DEBUG:
+    urlpatterns += patterns('', (
+            r'^static/(?P<path>.*)$',
+            'django.views.static.serve',
+            {'document_root': 'static'}
+            ))
