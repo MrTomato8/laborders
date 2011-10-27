@@ -27,8 +27,13 @@
 <p>{{ content }}<p>
 {% endblock %}
 
+{% if status %}
+   <p>Запись {{ status }}</p>
+{% endif %}
+
+
 {% if user.is_authenticated %}
-<a href='/new'>Добавить</a>
+<p><a href='/new'>Добавить</a></p>
 {% endif %}
 
 
@@ -88,6 +93,6 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Mon Oct 17 16:13:14 MSK 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Thu Oct 27 23:07:12 MSK 2011 <!-- hhmts end -->
 </div>
 </body> </html>
