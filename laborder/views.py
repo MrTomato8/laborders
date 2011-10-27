@@ -47,13 +47,6 @@ def wishes(request, status=False):
 
     return render_to_response("base.html", {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Я хочу... Чтобы гоблины пришли и забрали тебя!', 'user':request.user, 'status':st})
 
-@login_required()
-def new(request):
-    #add object
-    #return httpredirect /wishes
-    #как-то так
-    #HttpResponseRedirect(reverse('arch-summary', args=[1945]))
-    pass
 
 @login_required()
 def delete(request, num):
@@ -62,10 +55,15 @@ def delete(request, num):
 
 @login_required()
 def edit(request, num):
-    pass
+    wish = Wish.objects.get(id=num)
+    form = WishForm(instance=wish)
+    c = {'form':form}
+    c.update(csrf(request))
+    return render_to_response("hello.html", c)
 
-def hello(request):
-    lst = request.META.items()
+@login_required()
+def new(request):
+    #lst = request.META.items()
     #if request.method == 'POST':
     #    form = ContactForm(request.POST)
     #    if form.is_valid():

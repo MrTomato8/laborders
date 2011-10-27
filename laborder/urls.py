@@ -27,7 +27,7 @@ urlpatterns = patterns(
     (r'^admin/', include(admin.site.urls)),
     #главная страница, авторизация, после нее показ 
     #всего остального или же отказ при неправильном пароле.
-    (r'^hello/$', 'hello'), 
+    #(r'^hello/$', 'hello'), 
     #или так:
     (r'^$', 'main'),    
     #(r'^$', direct_to_template, {'template':'base.html'}),                   

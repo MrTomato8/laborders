@@ -1,24 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Counter{% endblock %}
+{% block title %}Добавление{% endblock %}
 {% block content %}
-{% if form.errors %}
-<p style="color: red;">
-Please correct the error{{ form.errors|pluralize }} below.
-</p>
-{% endif %}
 
 <form action="" method="post">
 <table>
-  {{ form.as_p }}
+  {{ form.as_ul }}
 </table>
 <input type="Submit" value="Submit">
 {% csrf_token %}
 </form>
 
-{% include 'page.html' %}
-<br>
-{% for key, value in list %}
-    {{ key }} = {{ value }} <br>
-    {% endfor %} 
 {% endblock %}
