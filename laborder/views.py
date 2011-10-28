@@ -23,12 +23,12 @@ def main(request, template_name='login.html'):
             return HttpResponseRedirect("/wishes")
         else:
             c.update({'login_error':u'Попробуйте еще раз'})
-            return render_to_response("login.html", c)
+            return render_to_response(template_name, c)
     else:
         if request.user.is_authenticated():
             return HttpResponseRedirect("/wishes")
         else:
-            return render_to_response('login.html', c)
+            return render_to_response(template_name, c)
 
 
 def logout(request):
@@ -36,27 +36,35 @@ def logout(request):
     return HttpResponseRedirect('/')
 
 @login_required()
-def wishes(request, status=False):
+def wishes(request, status):
+    print status
     wish_user = Wish.objects.filter(user=request.user.id)
     wish_other = Wish.objects.exclude(user=request.user.id)
-    st_dict = {'delete':u'удалена', 'edit':u'изменена', 'new':u'добавлена'}
+    st_dict = {'delete':u'удалена', 'edit':u'изменена', 'add':u'добавлена'}
     if status is not False:
         st = st_dict.get(status, False)
     else:
         st = False
 
-    return render_to_response("base.html", {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Я хочу... Чтобы гоблины пришли и забрали тебя!', 'user':request.user, 'status':st})
+    return render_to_response("wishes.html", {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False})
 
 
 @login_required()
 def delete(request, num):
-    #add object                                                                                                                                                                                                   #return httpredirect /wishes 
-    pass
+    #delete object
+    #return httpredirect /wishes 
+    w = Wish.objects.get(id=num)
+    w.delete()
+    return HttpResponseRedirect('/wishes')
 
 @login_required()
 def edit(request, num):
     wish = Wish.objects.get(id=num)
     form = WishForm(instance=wish)
+    if request.method == 'POST':
+        f = WishForm(request.POST, instance=wish)
+        f.save()
+        return HttpResponseRedirect('/wishes')
     c = {'form':form}
     c.update(csrf(request))
     return render_to_response("hello.html", c)
@@ -76,7 +84,16 @@ def new(request):
     #            )
     #        return HttpResponseRedirect('/hello')
     #else:
+    
+    #тут добавить текущего пользователя. Хотя можно
+    #его вообще убрать. 
     form = WishForm()
+    
+    if request.method == 'POST':
+        #print request.POST
+        f = WishForm(request.POST, instance=Wish())
+        new_wish = f.save()
+        return HttpResponseRedirect('/wishes')
     c = {'form':form}
     c.update(csrf(request))
     return render_to_response("hello.html", c)

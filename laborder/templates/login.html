@@ -5,13 +5,13 @@
   {% if login_error %}
     <p class="error">{{ login_error }}</p>
   {% endif %}
-b
+
   <form action='.' method='post'>
     <label for="username">Логин:</label>
     <input type="text" name="username" value="" id="username">
     <label for="password">Пароль:</label>
     <input type="password" name="password" value="" id="password">
-    <center><input type="submit" value="login" /></center>
+    <input type="submit" value="login" />
     <input type="hidden" name="next" value="{{ next|escape }}" />
     {% csrf_token %}
   </form>
