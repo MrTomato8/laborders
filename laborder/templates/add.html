@@ -4,9 +4,10 @@
 {% block content %}
 
 <form action="" method="post">
-<table>
-  {{ form.as_ul }}
-</table>
+{% for field in form %}
+{{ field.errors }}
+{{ field.label_tag }}: {{ field }} 
+{% endfor %}
 <input type="Submit" value="Submit">
 {% csrf_token %}
 </form>
