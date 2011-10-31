@@ -69,11 +69,11 @@ a:link {color:blue}
 a:visited {color:grey}
 a:hover {color:red}
 
-.fl_left { 
+.fl_center { 
     float: left; 
     position: relative; 
-    top: 40px; 
-    left: -30px; 
+    top: -30px; 
+    left: 35%; 
    }
 
 
