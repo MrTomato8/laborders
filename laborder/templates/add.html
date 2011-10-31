@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Добавление{% endblock %}
+{% block title %}{{ title|safe }}{% endblock %}
 {% block content %}
+<a href='/'>Назад</a>
 
 <form action="" method="post">
+<table border=1 align='top'>
+  <tr>
 {% for field in form %}
 {{ field.errors }}
-{{ field.label_tag }}: {{ field }} 
+<td>{{ field.label_tag }}</td>
 {% endfor %}
+</tr>
+<tr>
+{% for field in form %}
+<td valign='top'>{{ field }}</td>
+{% endfor %}
+</tr>
+</table>
 <input type="Submit" value="Submit">
 {% csrf_token %}
 </form>

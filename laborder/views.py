@@ -65,9 +65,9 @@ def edit(request, num):
         f = WishForm(request.POST, instance=wish)
         f.save()
         return HttpResponseRedirect('/wishes')
-    c = {'form':form}
+    c = {'form':form, 'title':u'Правка записи %s' % num}
     c.update(csrf(request))
-    return render_to_response("hello.html", c)
+    return render_to_response("add.html", c)
 
 @login_required()
 def new(request):
@@ -94,7 +94,7 @@ def new(request):
         f = WishForm(request.POST, instance=Wish())
         new_wish = f.save()
         return HttpResponseRedirect('/wishes')
-    c = {'form':form}
+    c = {'form':form, 'title':'Новая запись'}
     c.update(csrf(request))
-    return render_to_response("hello.html", c)
+    return render_to_response("add.html", c)
 

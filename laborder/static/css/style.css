@@ -12,6 +12,38 @@ input[type=submit], input[type=file]{
 	font-size:0.8em;
 }
 
+select[name=stuff]{
+    width:100px;
+    float:top;
+    left:30%;
+    }
+
+input[name=username]{ 
+    width:100px;
+    left:60%;
+    right:30%;                  
+    }
+
+input[name=price_man]{ 
+    width:50px;
+    }
+
+input[name=price_rus]{ 
+    width:50px;
+                       
+} 
+
+input[name=currency_rus]{ 
+    width:30px;
+                       
+}
+
+textarea[name=comment]{cols:100  }
+
+input[name=currency_man]{ 
+      width:30px;
+              }
+
 form, #res {
     padding:20px;
     border-style: none;
@@ -19,22 +51,23 @@ form, #res {
     background:#D0D0D0;
     color:#909090;
     font-family: arial; courier; sans-serif;
-    font-size:200%;
+    font-size:70%;
     position:absolute;
     top:30%;
-    left:35%;
-    right:40%;
+    left:1%;
+    right:1%;
     margin: 0 auto;
     min-width:25%;
+             text-align:center;
 }
 
 #res {
     text-align:center;
 }
 
-a:link {color:#888888}
-a:visited {color:#808080}
-a:hover {color:#404040}
+a:link {color:blue}
+a:visited {color:grey}
+a:hover {color:red}
 
 .fl_left { 
     float: left; 
@@ -42,6 +75,7 @@ a:hover {color:#404040}
     top: 40px; 
     left: -30px; 
    }
+
 
 .footer {
   position:absolute;

@@ -14,7 +14,7 @@
 
 {% if user.is_authenticated %}
 <table>
-    <tr>
+    <tr align='right'>
       <td>Имя пользователя</td>
       <td>Заказ</td>
       <td>Количество</td>
@@ -28,7 +28,7 @@
     </tr>
 							
   {% for item in wishes %}
-  <tr>
+  <tr align='right'>
     <td>{{ user.username }}</td>
     <td>{{ item.stuff.name_rus }} </td>
     <td>{{ item.pieces }}</td>
@@ -44,7 +44,7 @@
   {% endfor %}
   
   {% for item in other_wishes %}
-  <tr>
+  <tr align='right'>
     <td>{% if user.is_staff %} {{ item.user.username }} {% else %} XXX {% endif %}</td>
     <td>{{ item.stuff.name_rus }}</td>
     <td>{{ item.pieces }}</td>
