@@ -14,11 +14,14 @@
 <p><a href='/new'>Добавить</a></p>
 {% endif %}
 
+<p>
 <form action="" method='post'>{% csrf_token %}
 <input type='text' name='search'></input>
 <input type='submit' value='Найти'>
 </form>
+</p>
 
+<br>
 
 {% if user.is_authenticated %}
 <table>
@@ -46,8 +49,8 @@
     <td>{{ item.order_date|date:'d/m/y' }}</td>
     <td>{% if item.urgent %} Срочно!{% endif %}</td>
     <td>{{ item.get_status_display }}</td>
-    <td>{% if user == item.user %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
-    <td>{% if user == item.user %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
+    <td>{% if user == item.user or user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
+    <td>{% if user == item.user or user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
   </tr>
   {% endfor %}
   
