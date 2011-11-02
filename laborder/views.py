@@ -35,9 +35,16 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
+
 @login_required()
 def wishes(request, status):
-    print status
+    s = request.POST.get('search', None)
+    if s is not None:
+        #подумать, какие еще поля включить в поиск
+        wish_list = Wish.objects.filter(stuff__name_rus__icontains=s)
+        c = {'wishes':wish_list, 'page_name':u'Поиск %s' % s, 'user':request.user, 'status':False, 'back':True}
+        c.update(csrf(request))
+        return render_to_response("wishes.html", c)
     wish_user = Wish.objects.filter(user=request.user.id)
     wish_other = Wish.objects.exclude(user=request.user.id)
     st_dict = {'delete':u'удалена', 'edit':u'изменена', 'add':u'добавлена'}
@@ -45,9 +52,9 @@ def wishes(request, status):
         st = st_dict.get(status, False)
     else:
         st = False
-
-    return render_to_response("wishes.html", {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False})
-
+    c = {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False}
+    c.update(csrf(request))
+    return render_to_response("wishes.html", c)
 
 @login_required()
 def delete(request, num):
@@ -65,7 +72,7 @@ def edit(request, num):
         f = WishForm(request.POST, instance=wish)
         f.save()
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'title':u'Правка записи %s' % num}
+    c = {'form':form, 'title':u'Правка записи %s' % num, 'page_name':u'Правка записи %s' % num}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 
@@ -94,7 +101,7 @@ def new(request):
         f = WishForm(request.POST, instance=Wish())
         new_wish = f.save()
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'title':'Новая запись'}
+    c = {'form':form, 'user':request.user, 'page_name':u'Новая запись'}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 

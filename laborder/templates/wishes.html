@@ -6,10 +6,18 @@
    <p>Запись {{ status }}</p>
 {% endif %}
 
+{% if back %}
+<a href='/'>Назад</a>
+{% endif %}
 
 {% if user.is_authenticated %}
 <p><a href='/new'>Добавить</a></p>
 {% endif %}
+
+<form action="" method='post'>{% csrf_token %}
+<input type='text' name='search'></input>
+<input type='submit' value='Найти'>
+</form>
 
 
 {% if user.is_authenticated %}
@@ -29,7 +37,7 @@
 							
   {% for item in wishes %}
   <tr align='right'>
-    <td>{{ user.username }}</td>
+    <td>{% if user.username == item.user.username %} {{ item.user.username }} {% else %} {% if user.is_staff %} {{ item.user.username }} {% endif %} {% endif %}</td>
     <td>{{ item.stuff.name_rus }} </td>
     <td>{{ item.pieces }}</td>
     <td>{{item.stuff.package }}</td>
@@ -45,7 +53,7 @@
   
   {% for item in other_wishes %}
   <tr align='right'>
-    <td>{% if user.is_staff %} {{ item.user.username }} {% else %} XXX {% endif %}</td>
+    <td>{% if user.is_staff %} {{ item.user.username }} {% endif %}</td>
     <td>{{ item.stuff.name_rus }}</td>
     <td>{{ item.pieces }}</td>
     <td>{{item.stuff.package }}</td>
