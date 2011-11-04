@@ -5,7 +5,7 @@
   {% if login_error %}
     <p class="error">{{ login_error }}</p>
   {% endif %}
-
+<div class='login'>
   <form action='.' method='post'>
     <label for="username">Логин:</label>
     <input type="text" name="username" value="" id="username">
@@ -15,5 +15,5 @@
     <input type="hidden" name="next" value="{{ next|escape }}" />
     {% csrf_token %}
   </form>
-
+</div>
 {% endblock %}

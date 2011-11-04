@@ -40,11 +40,15 @@ input[name=currency_rus]{
 
 textarea[name=comment]{cols:100  }
 
+
+a span { display: none;} }
+
+
 input[name=currency_man]{ 
       width:30px;
               }
 
-form, #res {
+.login {
     padding:20px;
     border-style: none;
     -moz-border-radius:5px;
@@ -61,13 +65,15 @@ form, #res {
              text-align:center;
 }
 
-#res {
-    text-align:center;
-}
 
 a:link {color:blue}
 a:visited {color:grey}
-a:hover {color:red}
+a:hover span { display: block;
+               float:middle;
+               position: absolute; 
+               padding: 2px;
+               color: #AAA; background: green;
+               font: 10px; text-align: center;} }
 
 .fl_center { 
     float: left; 
