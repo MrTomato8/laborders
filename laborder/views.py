@@ -37,6 +37,13 @@ def logout(request):
 
 
 @login_required()
+def extsearch(resuest):
+    """
+    Extented search function
+    """
+    pass
+
+@login_required()
 def wishes(request, status):
     s = request.POST.get('search', None)
     if s is not None:

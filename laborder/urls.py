@@ -18,6 +18,7 @@ urlpatterns = patterns(
     'laborder.views',
     # Example:
     (r'^wishes/(?P<status>\w+)?/?$', views.wishes),
+    (r'^extsearch/', views.extsearch),
     (r'^logout/', 'logout'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

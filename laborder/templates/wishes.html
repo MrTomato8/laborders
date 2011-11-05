@@ -10,14 +10,11 @@
 <a href='/'>Назад</a>
 {% endif %}
 
-{% if user.is_authenticated %}
-<p><a href='/new'>Добавить</a></p>
-{% endif %}
-
 <p>
 <form action="" method='post'>{% csrf_token %}
 <input type='text' name='search'></input>
 <input type='submit' value='Найти'>
+<span><a href='/extsearch'>Расширенный поиск</a></span>
 </form>
 </p>
 

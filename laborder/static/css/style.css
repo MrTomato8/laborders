@@ -73,7 +73,38 @@ a:hover span { display: block;
                position: absolute; 
                padding: 2px;
                color: #AAA; background: green;
-               font: 10px; text-align: center;} }
+               font: 10px; text-align: center;
+               -moz-transition: all 1s ease-in-out;
+               transition: all 1s ease-in-out;
+               } 
+
+form span a:link {color:#E0E0E0 } 
+form:hover span a:link { color:grey } 
+form span { display:block;
+            color:#909090;
+            float:right;
+            position: absolute;
+            padding: 2px;
+            font-size:70%;
+            font-family: arial; courier; sans-serif;
+            -webkit-transition: all 1s ease-in-out; 
+            -moz-transition: all 1s ease-in-out; 
+            -o-transition: all 1s ease-in-out; 
+            -ms-transition: all 1s ease-in-out;}
+
+form:hover span {display: block;
+                  float:right;
+                  position: absolute;
+                  padding: 2px;
+                  background:#D0D0D0;
+                  font-size:70%;
+                  color:#909090;
+                  font-family: arial; courier; sans-serif;
+                  text-align:center;
+
+
+  }
+
 
 .fl_center { 
     float: left; 
