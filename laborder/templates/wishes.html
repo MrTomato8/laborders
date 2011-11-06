@@ -20,9 +20,6 @@
 
 <br>
 
-
-
-
 {% if user.is_authenticated %}
 <table>
     <tr align='right'>
@@ -42,13 +39,13 @@
   <tr align='right'>
     <td>{% if user.username == item.user.username %} {{ item.user.username }} {% else %} {% if user.is_staff %} {{ item.user.username }} {% endif %} {% endif %}</td>
     <td>{{ item.stuff.name_rus }} </td>
-    <td><a href="#">{{ item.pieces }}<span>&lt;{{ item.pieces }}, &gt;{{ item.pieces }}, ={{ item.pieces }} </span></a></td>
+    <td>{{ item.pieces }}</td>
     <td>{{item.stuff.package }}</td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'d/m/y' }}</td>
     <td>{% if item.urgent %} Срочно!{% endif %}</td>
-    <td><a href="#">{{ item.get_status_display }}<span>что-то там</span></a></td>
+    <td>{{ item.get_status_display }}</td>
     <td>{% if user == item.user or user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
     <td>{% if user == item.user or user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
   </tr>

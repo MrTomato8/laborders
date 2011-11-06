@@ -3,7 +3,7 @@
 
 from numpy import array
 from django.shortcuts import render_to_response
-from laborder.orders.forms import ContactForm, WishForm
+from laborder.orders.forms import ContactForm, WishForm, StuffForm
 from django.core.mail import send_mail
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
@@ -41,8 +41,12 @@ def extsearch(resuest):
     """
     Extented search function
     """
-    pass
-
+    #обработать поисковый запрос и вернцть результат
+    stuffform = StuffForm() 
+    wishform = WishForm()
+    print wishform
+    return render_to_response("extsearch.html", {'wish_form':wishform, 'stuff_form':stuffform, 'page_name':u'Расширенный поиск'})
+    
 @login_required()
 def wishes(request, status):
     s = request.POST.get('search', None)

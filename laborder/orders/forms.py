@@ -7,6 +7,10 @@ class ContactForm(forms.Form):
     subject = forms.CharField()
     email = forms.EmailField(required=False)
     message = forms.CharField(widget=forms.Textarea)
+
+class StuffForm(forms.ModelForm):
+    class Meta:
+        model = Stuff
     
 class WishForm(forms.ModelForm):
     class Meta:

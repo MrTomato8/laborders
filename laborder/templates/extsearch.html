@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_name }}{% endblock %}
+{% block content %}
+<a href='/'>Назад</a>
+<div class='extsearch'>
+<form action="" method="get">
+
+{% for field in wish_form %}
+{{ field.errors }}
+<p>{{ field.label_tag }} {{ field }}</p>
+{% endfor %}
+
+{% for field in stuff_form %}
+{{ field.errors }}
+<p>{{ field.label_tag }} {{ field }}</p>
+{% endfor %}
+
+<input type="Submit" value="Найти">
+
+</form>
+</div>
+{% endblock %}

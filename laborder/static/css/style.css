@@ -48,6 +48,8 @@ input[name=currency_man]{
       width:30px;
               }
 
+
+
 .login {
     padding:20px;
     border-style: none;
@@ -106,6 +108,13 @@ form:hover span {display: block;
   }
 
 
+.extsearch { float:left;
+             position:relative;
+             background-color:lightgrey
+
+
+ }
+
 .fl_center { 
     float: left; 
     position: relative; 
@@ -115,7 +124,8 @@ form:hover span {display: block;
 
 
 .footer {
-  position:absolute;
+  position:relative;
+  float:left;
   bottom:0;
   left:0;
   width:100%;
