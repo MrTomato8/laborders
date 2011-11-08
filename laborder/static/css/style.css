@@ -47,8 +47,12 @@ a span { display: none;} }
 input[name=currency_man]{ 
       width:30px;
               }
-
-
+.wrapper {
+position:relative;
+height:100%;
+min-height:80%;
+background:green;
+}
 
 .login {
     padding:20px;
@@ -58,13 +62,13 @@ input[name=currency_man]{
     color:#909090;
     font-family: arial; courier; sans-serif;
     font-size:70%;
-    position:absolute;
     top:30%;
     left:1%;
     right:1%;
     margin: 0 auto;
-    min-width:25%;
-             text-align:center;
+    min-width:95%;
+    min-height:80%;
+    text-align:center;
 }
 
 
@@ -125,7 +129,7 @@ form:hover span {display: block;
 
 .footer {
   position:relative;
-  float:left;
+  float:top;
   bottom:0;
   left:0;
   width:100%;
