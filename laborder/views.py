@@ -44,18 +44,26 @@ def extsearch(resuest):
     #обработать поисковый запрос и вернцть результат
     stuffform = StuffForm() 
     wishform = WishForm()
-    print wishform
+
     return render_to_response("extsearch.html", {'wish_form':wishform, 'stuff_form':stuffform, 'page_name':u'Расширенный поиск'})
     
 @login_required()
 def wishes(request, status):
-    s = request.POST.get('search', None)
-    if s is not None:
+    if request.GET:
+        #ssearch - simple search
+        #остальные параметры - для расширенного поиска
+        s = request.GET.get('ssearch', None)
+        if s is not None:
         #подумать, какие еще поля включить в поиск
-        wish_list = Wish.objects.filter(stuff__name_rus__icontains=s)
-        c = {'wishes':wish_list, 'page_name':u'Поиск %s' % s, 'user':request.user, 'status':False, 'back':True}
-        c.update(csrf(request))
-        return render_to_response("wishes.html", c)
+        #Наверное ориг. название и каталожный номер. 
+        #Также надо сделать какое-то автодополнение при вводе 
+        #оборудования - чтобы можно было вводить русское, альтернативоне
+        #названия или каталожный номер.
+            wish_list = Wish.objects.filter(stuff__name_rus__icontains=s)
+            c = {'wishes':wish_list, 'page_name':u'Поиск %s' % s, 'user':request.user, 'status':False, 'back':True}
+            
+            return render_to_response("wishes.html", c)
+
     wish_user = Wish.objects.filter(user=request.user.id)
     wish_other = Wish.objects.exclude(user=request.user.id)
     st_dict = {'delete':u'удалена', 'edit':u'изменена', 'add':u'добавлена'}
