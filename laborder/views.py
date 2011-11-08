@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect
 from laborder.orders.models import Stuff, Wish
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
 
 def main(request, template_name='login.html'):
     c = {}
@@ -54,15 +56,17 @@ def wishes(request, status):
         #остальные параметры - для расширенного поиска
         s = request.GET.get('ssearch', None)
         if s is not None:
-        #подумать, какие еще поля включить в поиск
-        #Наверное ориг. название и каталожный номер. 
-        #Также надо сделать какое-то автодополнение при вводе 
+        #простой поиск    
+        #надо сделать какое-то автодополнение при вводе 
         #оборудования - чтобы можно было вводить русское, альтернативоне
         #названия или каталожный номер.
-            wish_list = Wish.objects.filter(stuff__name_rus__icontains=s)
+            qset = (Q(stuff__name_rus__icontains=s) | Q(stuff__name_exact__icontains=s) | Q(stuff__cat_num__icontains=s))
+            wish_list = Wish.objects.filter(qset)
             c = {'wishes':wish_list, 'page_name':u'Поиск %s' % s, 'user':request.user, 'status':False, 'back':True}
-            
             return render_to_response("wishes.html", c)
+        #расширенный поиск
+        else:
+            pass
 
     wish_user = Wish.objects.filter(user=request.user.id)
     wish_other = Wish.objects.exclude(user=request.user.id)
