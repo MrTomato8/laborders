@@ -23,29 +23,37 @@
 {% if user.is_authenticated %}
 <table>
     <tr align='right'>
-      <td>Имя пользователя</td>
-      <td>Заказ</td>
-      <td>Количество</td>
+      <td>Название</td>
+      <td>Точное название</td>
+      <td>Производитель</td>
+      <td>Каталожный номер</td>
       <td>Фасовка</td>
+      <td>Количество</td>
+      <td>Имя пользователя</td>
+      <td>Срочность</td>
+      <td>Ссылка</td>
+      <td>Статус</td>
       <td>Цена за ед.</td>
       <td>Всего</td>
       <td>Дата заказа</td>
-      <td>Срочность</td>
-      <td>Статус</td>
       <td></td>
     </tr>
 							
-  {% for item in wishes %}
+    {% for item in wishes %}
   <tr align='right'>
-    <td>{% if user.username == item.user.username %} {{ item.user.username }} {% else %} {% if user.is_staff %} {{ item.user.username }} {% endif %} {% endif %}</td>
     <td>{{ item.stuff.name_rus }} </td>
-    <td>{{ item.pieces }}</td>
+    <td>{{ item.stuff.name_exact }} </td>
+    <td>{{ item.stuff.manuf }} </td>
+    <td>{{ item.stuff.cat_num }} </td>
     <td>{{item.stuff.package }}</td>
+    <td>{{ item.pieces }}</td>
+    <td>{% if user.username == item.user.username %} {{ item.user.username }} {% else %} {% if user.is_staff %} {{ item.user.username }} {% endif %} {% endif %}</td>
+    <td>{% if item.urgent %} Срочно!{% endif %}</td>
+    <td>{% if item.stuff.man_site %} {{ item.stuff.man_site }} {% endif %} </td>
+    <td>{{ item.get_status_display }}</td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'d/m/y' }}</td>
-    <td>{% if item.urgent %} Срочно!{% endif %}</td>
-    <td>{{ item.get_status_display }}</td>
     <td>{% if user == item.user or user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
     <td>{% if user == item.user or user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
   </tr>
@@ -53,15 +61,19 @@
   
   {% for item in other_wishes %}
   <tr align='right'>
-    <td>{% if user.is_staff %} {{ item.user.username }} {% endif %}</td>
     <td>{{ item.stuff.name_rus }}</td>
-    <td>{{ item.pieces }}</td>
+    <td>{{ item.stuff.name_exact }} </td>
+    <td>{{ item.stuff.manuf }} </td>
+    <td>{{ item.stuff.cat_num }} </td>
     <td>{{item.stuff.package }}</td>
+    <td>{{ item.pieces }}</td>
+    <td>{% if user.is_staff %} {{ item.user.username }} {% endif %}</td>
+    <td>{% if item.urgent %} Срочно!{% endif %}</td>
+    <td>{% if item.stuff.man_site %} {{ item.stuff.man_site }} {% endif %} </td>
+    <td>{{ item.get_status_display }}</td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'d/m/y' }}</td>
-    <td>{% if item.urgent %} Срочно!{% endif %}</td>
-    <td>{{ item.get_status_display }}</td>
     <td>{% if user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
     <td>{% if user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
   </tr>
