@@ -66,7 +66,27 @@ def wishes(request, status):
             return render_to_response("wishes.html", c)
         #расширенный поиск
         else:
-            pass
+            stuff
+            pieces
+            price_man
+            currency_man
+            price_rus
+            currency_rus
+            user
+            status
+            comment
+            name_rus
+            name_exact
+            manuf
+            man_site
+            cat_num
+            package
+            measure
+            stgroup
+
+            qset = (Q(stuff__name_rus__icontains=s) | Q(stuff__name_exact__icontains=s) | Q(stuff__cat_num__icontains=s))
+            wish_list = Wish.objects.filter(qset)
+            c = {'wishes':wish_list, 'page_name':u'Расширенный поиск %s' % s, 'user':request.user, 'status':False, 'back':True}
 
     wish_user = Wish.objects.filter(user=request.user.id)
     wish_other = Wish.objects.exclude(user=request.user.id)
