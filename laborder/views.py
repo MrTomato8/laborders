@@ -39,15 +39,15 @@ def logout(request):
 
 
 @login_required()
-def extsearch(resuest):
+def extsearch(request):
     """
     Extented search function
     """
     #обработать поисковый запрос и вернцть результат
     stuffform = StuffForm() 
     wishform = WishForm()
-
-    return render_to_response("extsearch.html", {'wish_form':wishform, 'stuff_form':stuffform, 'page_name':u'Расширенный поиск'})
+    print 'wishform', wishform
+    return render_to_response("extsearch.html", {'wish':wishform, 'stuff':stuffform, 'user':request.user, 'page_name':u'Расширенный поиск'})
     
 @login_required()
 def wishes(request, status):
@@ -65,24 +65,27 @@ def wishes(request, status):
             c = {'wishes':wish_list, 'page_name':u'Поиск %s' % s, 'user':request.user, 'status':False, 'back':True}
             return render_to_response("wishes.html", c)
         #расширенный поиск
+        #по 18 пунктам
         else:
-            stuff
+            stgroup
+            name_rus
+            name_exact
             pieces
             price_man
             currency_man
             price_rus
             currency_rus
             user
+            order_date
             status
             comment
-            name_rus
-            name_exact
+            urgent
             manuf
             man_site
             cat_num
             package
             measure
-            stgroup
+            
 
             qset = (Q(stuff__name_rus__icontains=s) | Q(stuff__name_exact__icontains=s) | Q(stuff__cat_num__icontains=s))
             wish_list = Wish.objects.filter(qset)
@@ -121,26 +124,9 @@ def edit(request, num):
 
 @login_required()
 def new(request):
-    #lst = request.META.items()
-    #if request.method == 'POST':
-    #    form = ContactForm(request.POST)
-    #    if form.is_valid():
-    #        cd = form.cleaned_data
-    #        send_mail(
-    #            cd['subject'],
-    #            cd['message'],
-    #            cd.get('email', 'piggy@piggy.thruhere.net'),
-    #            ['piggy@piggy.thruhere.net',],
-    #            )
-    #        return HttpResponseRedirect('/hello')
-    #else:
-    
-    #тут добавить текущего пользователя. Хотя можно
-    #его вообще убрать. 
     form = WishForm()
     
     if request.method == 'POST':
-        #print request.POST
         f = WishForm(request.POST, instance=Wish())
         new_wish = f.save()
         return HttpResponseRedirect('/wishes')

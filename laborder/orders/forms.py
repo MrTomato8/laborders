@@ -11,7 +11,10 @@ class ContactForm(forms.Form):
 class StuffForm(forms.ModelForm):
     class Meta:
         model = Stuff
-    
+        #fields = ('name_rus', 'name_exact')
+        
 class WishForm(forms.ModelForm):
     class Meta:
         model = Wish
+        #fields = ('order_date',)
+        
