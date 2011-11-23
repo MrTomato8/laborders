@@ -11,10 +11,21 @@ class ContactForm(forms.Form):
 class StuffForm(forms.ModelForm):
     class Meta:
         model = Stuff
-        #fields = ('name_rus', 'name_exact')
         
+        #fields = ('name_rus', 'name_exact')
+    def __init__(self, *args, **kwargs):
+        super(StuffForm, self).__init__(*args, **kwargs)
+
+        for key in self.fields:
+            self.fields[key].required = False
+
 class WishForm(forms.ModelForm):
     class Meta:
         model = Wish
         #fields = ('order_date',)
-        
+    def __init__(self, *args, **kwargs):
+        super(WishForm, self).__init__(*args, **kwargs)
+
+        for key in self.fields:
+            self.fields[key].required = False
+
