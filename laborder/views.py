@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from numpy import array
 from django.shortcuts import render_to_response
 from laborder.orders.forms import ContactForm, WishForm, StuffForm
@@ -11,7 +10,6 @@ from laborder.orders.models import Stuff, Wish
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
 
 def main(request, template_name='login.html'):
     c = {}
@@ -46,7 +44,7 @@ def extsearch(request):
     #обработать поисковый запрос и вернцть результат
     stuffform = StuffForm() 
     wishform = WishForm()
-    print 'wishform', wishform
+    
     return render_to_response("extsearch.html", {'wish':wishform, 'stuff':stuffform, 'user':request.user, 'page_name':u'Расширенный поиск'})
     
 @login_required()
@@ -68,7 +66,7 @@ def wishes(request, status):
         #по 18 пунктам
         else:
             qset = (
-                Q(stuff__stgroup__icontains=request.GET.get('stgroup', None)) | 
+                Q(stuff__stgroup__exact=request.GET.get('stgroup', None)) |
                 Q(stuff__name_rus__icontains=request.GET.get('name_rus', None)) |
                 Q(stuff__name_exact__icontains=request.GET.get('name_exact', None)) |
                 Q(stuff__manuf__icontains=request.GET.get('manuf', None)) |

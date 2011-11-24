@@ -14,31 +14,33 @@
 <form action="." method='get'>
 <input type='text' name='ssearch'></input>
 <input type='submit' value='Найти'>
-<span><a href='/extsearch'>Расширенный поиск</a></span>
+<!--<span><a href='/extsearch'>Расширенный поиск</a></span>-->
 </form>
 </p>
 
 <br>
 
 {% if user.is_authenticated %}
-<table>
+<table id="wishTable" class="tablesorter">
+  <thead>
     <tr align='right'>
-      <td>Название</td>
-      <td>Точное название</td>
-      <td>Производитель</td>
-      <td>Каталожный номер</td>
-      <td>Фасовка</td>
-      <td>Количество</td>
-      <td>Имя пользователя</td>
-      <td>Срочность</td>
-      <td>Ссылка</td>
-      <td>Статус</td>
-      <td>Цена за ед.</td>
-      <td>Всего</td>
-      <td>Дата заказа</td>
-      <td></td>
+      <th>Название</th>
+      <th>Точное название</th>
+      <th>Производитель</th>
+      <th>Каталожный номер</th>
+      <th>Фасовка</th>
+      <th>Количество</th>
+      <th>Имя пользователя</th>
+      <th>Срочность</th>
+      <th>Ссылка</th>
+      <th>Статус</th>
+      <th>Цена за ед.</th>
+      <th>Всего</th>
+      <th>Дата заказа</th>
+      <th></th>
     </tr>
-							
+    </thead>
+  <tbody>
     {% for item in wishes %}
   <tr align='right'>
     <td>{{ item.stuff.name_rus }} </td>
@@ -78,6 +80,7 @@
     <td>{% if user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
   </tr>
     {% endfor %}
+  </tbody>
 </table>
 {% endif %}
 

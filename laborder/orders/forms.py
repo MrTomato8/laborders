@@ -12,7 +12,7 @@ class StuffForm(forms.ModelForm):
     class Meta:
         model = Stuff
         
-        #fields = ('name_rus', 'name_exact')
+        #exclude = ()
     def __init__(self, *args, **kwargs):
         super(StuffForm, self).__init__(*args, **kwargs)
 
