@@ -122,7 +122,7 @@ def new(request):
         f = WishForm(request.POST, instance=Wish())
         new_wish = f.save()
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'user':request.user, 'page_name':u'Новая запись'}
+    c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание'}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 

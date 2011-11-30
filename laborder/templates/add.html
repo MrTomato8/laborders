@@ -4,22 +4,16 @@
 {% block content %}
 <a href='/'>Отменить</a>
 
-<form action="" method="post">
-<table border=1 align='top'>
-  <tr>
 {% for field in form %}
-{{ field.errors }}
-<td>{{ field.label_tag }}</td>
+    <div>
+        <label for="{{ field.auto_id }}">{{ field.label_tag }}
+        {% if field.field.required %}*{% endif %}</label>
+        {{ field }}
+	
+    </div>
+
 {% endfor %}
-</tr>
-<tr>
-{% for field in form %}
-<td valign='top'>{{ field }}</td>
-{% endfor %}
-</tr>
-</table>
-<input type="Submit" value="Submit">
+<div style='display:none'><input type='hidden' name='user' value='{{ user.id }}'></div>
 {% csrf_token %}
-</form>
 
 {% endblock %}

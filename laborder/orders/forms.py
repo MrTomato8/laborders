@@ -13,19 +13,20 @@ class StuffForm(forms.ModelForm):
         model = Stuff
         
         #exclude = ()
-    def __init__(self, *args, **kwargs):
-        super(StuffForm, self).__init__(*args, **kwargs)
+    #def __init__(self, *args, **kwargs):
+    #    super(StuffForm, self).__init__(*args, **kwargs)
 
-        for key in self.fields:
-            self.fields[key].required = False
+    #    for key in self.fields:
+    #        self.fields[key].required = False
 
 class WishForm(forms.ModelForm):
     class Meta:
         model = Wish
+        exclude = ('user',)
         #fields = ('order_date',)
-    def __init__(self, *args, **kwargs):
-        super(WishForm, self).__init__(*args, **kwargs)
+    #def __init__(self, *args, **kwargs):
+    #    super(WishForm, self).__init__(*args, **kwargs)
 
-        for key in self.fields:
-            self.fields[key].required = False
+    #    for key in self.fields:
+    #        self.fields[key].required = False
 
