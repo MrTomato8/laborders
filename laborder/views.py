@@ -114,6 +114,11 @@ def edit(request, num):
     c.update(csrf(request))
     return render_to_response("add.html", c)
 
+
+@login_required()
+def addstuff(request):
+    pass
+
 @login_required()
 def new(request):
     form = WishForm()
