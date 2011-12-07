@@ -114,20 +114,32 @@ def edit(request, num):
     c.update(csrf(request))
     return render_to_response("add.html", c)
 
+def back(url):
+    back = url.strip('/').split('/')
+    if len(back) > 1:
+        back.pop()
+        return back[-1]
+    else:
+        return ''
 
 @login_required()
 def addstuff(request):
-    pass
+    form = StuffForm()
+    if request.method == 'POST':
+        f = StuffForm(request.POST, instance=Stuff())
+        new_stuff = f.save()
+        return HttpResponseRedirect('/new')
+    c = {'form':form, 'user':request.user, 'page_name':u'Новое оборудование', 'back':back(request.path)}
+    c.update(csrf(request))
+    return render_to_response("add.html", c)
 
 @login_required()
 def new(request):
     form = WishForm()
-    
     if request.method == 'POST':
         f = WishForm(request.POST, instance=Wish())
         new_wish = f.save()
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание'}
+    c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path)}
     c.update(csrf(request))
     return render_to_response("add.html", c)
-

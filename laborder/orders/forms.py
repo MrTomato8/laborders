@@ -22,11 +22,6 @@ class StuffForm(forms.ModelForm):
 class WishForm(forms.ModelForm):
     class Meta:
         model = Wish
-        exclude = ('user',)
-        #fields = ('order_date',)
-    #def __init__(self, *args, **kwargs):
-    #    super(WishForm, self).__init__(*args, **kwargs)
+        #exclude = ('user',)
 
-    #    for key in self.fields:
-    #        self.fields[key].required = False
 
