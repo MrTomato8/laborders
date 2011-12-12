@@ -90,7 +90,7 @@ def wishes(request, status):
         st = st_dict.get(status, False)
     else:
         st = False
-    c = {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False}
+    c = {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False, 'new':True}
     c.update(csrf(request))
     return render_to_response("wishes.html", c)
 
@@ -106,11 +106,13 @@ def delete(request, num):
 def edit(request, num):
     wish = Wish.objects.get(id=num)
     form = WishForm(instance=wish)
+    print wish.status
     if request.method == 'POST':
         f = WishForm(request.POST, instance=wish)
         f.save()
+
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'title':u'Правка записи %s' % num, 'page_name':u'Правка записи %s' % num}
+    c = {'form':form, 'user':request.user, 'title':u'Правка записи %s' % num, 'page_name':u'Правка записи %s' % num, 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 
@@ -129,7 +131,7 @@ def addstuff(request):
         f = StuffForm(request.POST, instance=Stuff())
         new_stuff = f.save()
         return HttpResponseRedirect('/new')
-    c = {'form':form, 'user':request.user, 'page_name':u'Новое оборудование', 'back':back(request.path)}
+    c = {'form':form, 'user':request.user, 'back':back(request.path), 'modif':'Добавить'}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 
@@ -140,6 +142,6 @@ def new(request):
         f = WishForm(request.POST, instance=Wish())
         new_wish = f.save()
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path)}
+    c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
     c.update(csrf(request))
     return render_to_response("add.html", c)

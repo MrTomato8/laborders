@@ -23,11 +23,15 @@ $(document).ready(function()
 -->
 <div class='wrapper'>
 {% if user %}
-Здрасте, {{ user.username }}!
+Здравствуйте, {{ user.username }}!
 {% endif %}
 
 {% if user.is_authenticated %}
-<a href='/logout'>[logout]</a><a href='/new'>[Добавить]</a>
+<a href='/logout'><img src='/static/picts/out.png' width=40></a>
+<br>
+{% if new %}
+  <a href='/new'><img src='/static/picts/add.png' height=60></a>
+{% endif %}  
 {% endif %}
 
 <h1>
@@ -48,6 +52,6 @@ $(document).ready(function()
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Sat Nov  5 16:53:45 MSK 2011 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Tue Dec 13 00:09:29 MSK 2011 <!-- hhmts end -->
 </div>
 </body> </html>

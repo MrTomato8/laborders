@@ -23,7 +23,7 @@
 {% if user.is_authenticated %}
 <table id="wishTable" class="tablesorter">
   <thead>
-    <tr align='right'>
+    <tr align='center'>
       <th>Название</th>
       <th>Точное название</th>
       <th>Производитель</th>
@@ -42,7 +42,7 @@
     </thead>
   <tbody>
     {% for item in wishes %}
-  <tr align='right'>
+  <tr align='center'>
     <td>{{ item.stuff.name_rus }} </td>
     <td>{{ item.stuff.name_exact }} </td>
     <td>{{ item.stuff.manuf }} </td>
@@ -50,7 +50,7 @@
     <td>{{item.stuff.package }}</td>
     <td>{{ item.pieces }}</td>
     <td>{% if user.username == item.user.username %} {{ item.user.username }} {% else %} {% if user.is_staff %} {{ item.user.username }} {% endif %} {% endif %}</td>
-    <td>{% if item.urgent %} Срочно!{% endif %}</td>
+    <td>{% if item.urgent %}<img src='/static/picts/urgent.png' width=20>{% endif %}</td>
     <td>{% if item.stuff.man_site %} {{ item.stuff.man_site }} {% endif %} </td>
     <td>{{ item.get_status_display }}</td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
@@ -62,7 +62,7 @@
   {% endfor %}
   
   {% for item in other_wishes %}
-  <tr align='right'>
+  <tr align='center'>
     <td>{{ item.stuff.name_rus }}</td>
     <td>{{ item.stuff.name_exact }} </td>
     <td>{{ item.stuff.manuf }} </td>
@@ -70,7 +70,7 @@
     <td>{{item.stuff.package }}</td>
     <td>{{ item.pieces }}</td>
     <td>{% if user.is_staff %} {{ item.user.username }} {% endif %}</td>
-    <td>{% if item.urgent %} Срочно!{% endif %}</td>
+    <td>{% if item.urgent %}<img src='/static/picts/urgent.png' width=20>{% endif %}</td>
     <td>{% if item.stuff.man_site %} {{ item.stuff.man_site }} {% endif %} </td>
     <td>{{ item.get_status_display }}</td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
