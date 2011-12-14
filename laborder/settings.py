@@ -93,10 +93,13 @@ TEMPLATE_DIRS = (
 
 LOGIN_URL = '/'
 
+SIMPLE_AUTOCOMPLETE_MODELS = ('orders.stuff',)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'simple_autocomplete',
     #'django.contrib.sites',
     #'django.contrib.messages',
     'laborder.orders',

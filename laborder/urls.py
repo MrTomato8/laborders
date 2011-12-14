@@ -20,6 +20,7 @@ urlpatterns = patterns(
     (r'^wishes/(?P<status>\w+)?/?$', views.wishes),
     (r'^extsearch/', views.extsearch),
     (r'^logout/', 'logout'),
+    (r'^simple-autocomplete/', include('simple_autocomplete.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^new/', 'new'),

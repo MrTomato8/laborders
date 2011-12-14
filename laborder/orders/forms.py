@@ -9,6 +9,7 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
 
 class StuffForm(forms.ModelForm):
+    #name_rus=forms.ModelChoiceField(queryset=Stuff.objects.all(), initial=3)
     class Meta:
         model = Stuff
         
@@ -20,6 +21,7 @@ class StuffForm(forms.ModelForm):
     #        self.fields[key].required = False
 
 class WishForm(forms.ModelForm):
+
     class Meta:
         model = Wish
         #exclude = ('user',)

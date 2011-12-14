@@ -3,18 +3,18 @@
 {% block content %}
 <div class='content'>
 {% if status %}
-   <p>Ğ—Ğ°Ğ¿Ğ¸ÑÑŒ {{ status }}</p>
+   <p>œô¨·œô¨Ğœô¨ßœô¨Øœô¨áœô¨ì {{ status }}</p>
 {% endif %}
 
 {% if back %}
-<a href='/'>ĞĞ°Ğ·Ğ°Ğ´</a>
+<a href='/'>œô¨½œô¨Ğœô¨×œô¨Ğœô¨Ô</a>
 {% endif %}
 
 <p>
 <form action="." method='get'>
 <input type='text' name='ssearch'></input>
-<input type='submit' value='ĞĞ°Ğ¹Ñ‚Ğ¸'>
-<!--<span><a href='/extsearch'>Ğ Ğ°ÑÑˆĞ¸Ñ€ĞµĞ½Ğ½Ñ‹Ğ¹ Ğ¿Ğ¾Ğ¸ÑĞº</a></span>-->
+<input type='submit' value='œô¨½œô¨Ğœô¨Ùœô¨âœô¨Ø'>
+<!--<span><a href='/extsearch'>œô¨Àœô¨Ğœô¨áœô¨èœô¨Øœô¨àœô¨Õœô¨İœô¨İœô¨ëœô¨Ù œô¨ßœô¨Şœô¨Øœô¨áœô¨Ú</a></span>-->
 </form>
 </p>
 
@@ -24,19 +24,19 @@
 <table id="wishTable" class="tablesorter">
   <thead>
     <tr align='center'>
-      <th>ĞĞ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ</th>
-      <th>Ğ¢Ğ¾Ñ‡Ğ½Ğ¾Ğµ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ</th>
-      <th>ĞŸÑ€Ğ¾Ğ¸Ğ·Ğ²Ğ¾Ğ´Ğ¸Ñ‚ĞµĞ»ÑŒ</th>
-      <th>ĞšĞ°Ñ‚Ğ°Ğ»Ğ¾Ğ¶Ğ½Ñ‹Ğ¹ Ğ½Ğ¾Ğ¼ĞµÑ€</th>
-      <th>Ğ¤Ğ°ÑĞ¾Ğ²ĞºĞ°</th>
-      <th>ĞšĞ¾Ğ»Ğ¸Ñ‡ĞµÑÑ‚Ğ²Ğ¾</th>
-      <th>Ğ˜Ğ¼Ñ Ğ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»Ñ</th>
-      <th>Ğ¡Ñ€Ğ¾Ñ‡Ğ½Ğ¾ÑÑ‚ÑŒ</th>
-      <th>Ğ¡ÑÑ‹Ğ»ĞºĞ°</th>
-      <th>Ğ¡Ñ‚Ğ°Ñ‚ÑƒÑ</th>
-      <th>Ğ¦ĞµĞ½Ğ° Ğ·Ğ° ĞµĞ´.</th>
-      <th>Ğ’ÑĞµĞ³Ğ¾</th>
-      <th>Ğ”Ğ°Ñ‚Ğ° Ğ·Ğ°ĞºĞ°Ğ·Ğ°</th>
+      <th>œô¨½œô¨Ğœô¨×œô¨Òœô¨Ğœô¨İœô¨Øœô¨Õ</th>
+      <th>œô¨Âœô¨Şœô¨çœô¨İœô¨Şœô¨Õ œô¨İœô¨Ğœô¨×œô¨Òœô¨Ğœô¨İœô¨Øœô¨Õ</th>
+      <th>œô¨¿œô¨àœô¨Şœô¨Øœô¨×œô¨Òœô¨Şœô¨Ôœô¨Øœô¨âœô¨Õœô¨Ûœô¨ì</th>
+      <th>œô¨ºœô¨Ğœô¨âœô¨Ğœô¨Ûœô¨Şœô¨Öœô¨İœô¨ëœô¨Ù œô¨İœô¨Şœô¨Üœô¨Õœô¨à</th>
+      <th>œô¨Äœô¨Ğœô¨áœô¨Şœô¨Òœô¨Úœô¨Ğ</th>
+      <th>œô¨ºœô¨Şœô¨Ûœô¨Øœô¨çœô¨Õœô¨áœô¨âœô¨Òœô¨Ş</th>
+      <th>œô¨¸œô¨Üœô¨ï œô¨ßœô¨Şœô¨Ûœô¨ìœô¨×œô¨Şœô¨Òœô¨Ğœô¨âœô¨Õœô¨Ûœô¨ï</th>
+      <th>œô¨Áœô¨àœô¨Şœô¨çœô¨İœô¨Şœô¨áœô¨âœô¨ì</th>
+      <th>œô¨Áœô¨áœô¨ëœô¨Ûœô¨Úœô¨Ğ</th>
+      <th>œô¨Áœô¨âœô¨Ğœô¨âœô¨ãœô¨á</th>
+      <th>œô¨Æœô¨Õœô¨İœô¨Ğ œô¨×œô¨Ğ œô¨Õœô¨Ô.</th>
+      <th>œô¨²œô¨áœô¨Õœô¨Óœô¨Ş</th>
+      <th>œô¨´œô¨Ğœô¨âœô¨Ğ œô¨×œô¨Ğœô¨Úœô¨Ğœô¨×œô¨Ğ</th>
       <th></th>
     </tr>
     </thead>
@@ -56,8 +56,8 @@
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'d/m/y' }}</td>
-    <td>{% if user == item.user or user.is_staff %} <a href='/edit/{{ item.id }}'>ĞŸÑ€Ğ°Ğ²Ğ¸Ñ‚ÑŒ</a>{% endif %}</td>
-    <td>{% if user == item.user or user.is_staff %} <a href='/delete/{{ item.id }}'>Ğ£Ğ´Ğ°Ğ»Ğ¸Ñ‚ÑŒ</a>{% endif %}</td>
+    <td>{% if user == item.user or user.is_staff %} <a href='/edit/{{ item.id }}'>œô¨¿œô¨àœô¨Ğœô¨Òœô¨Øœô¨âœô¨ì</a>{% endif %}</td>
+    <td>{% if user == item.user or user.is_staff %} <a href='/delete/{{ item.id }}'>œô¨Ãœô¨Ôœô¨Ğœô¨Ûœô¨Øœô¨âœô¨ì</a>{% endif %}</td>
   </tr>
   {% endfor %}
   
@@ -76,12 +76,12 @@
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'d/m/y' }}</td>
-    <td>{% if user.is_staff %} <a href='/edit/{{ item.id }}'>ĞŸÑ€Ğ°Ğ²Ğ¸Ñ‚ÑŒ</a>{% endif %}</td>
-    <td>{% if user.is_staff %} <a href='/delete/{{ item.id }}'>Ğ£Ğ´Ğ°Ğ»Ğ¸Ñ‚ÑŒ</a>{% endif %}</td>
+    <td>{% if user.is_staff %} <a href='/edit/{{ item.id }}'>œô¨¿œô¨àœô¨Ğœô¨Òœô¨Øœô¨âœô¨ì</a>{% endif %}</td>
+    <td>{% if user.is_staff %} <a href='/delete/{{ item.id }}'>œô¨Ãœô¨Ôœô¨Ğœô¨Ûœô¨Øœô¨âœô¨ì</a>{% endif %}</td>
   </tr>
     {% endfor %}
   </tbody>
 </table>
 {% endif %}
-</div>
+</diva>
 {% endblock %}

@@ -22,7 +22,12 @@ def main(request, template_name='login.html'):
             auth.login(request, user)
             return HttpResponseRedirect("/wishes")
         else:
-            c.update({'login_error':u'Попробуйте еще раз'})
+            if len(username) > 0 and len(password) > 0:
+                c.update({'login_error':u'%s, вы точно ввели правильный пароль? А может быть вы вовсе не %s?' % (username, username)})
+            elif len(username) > 0 and len(password) == 0:
+                c.update({'login_error':u'%s, напишите пожалуйста пароль' % (username)})
+            else:
+                c.update({'login_error':u'нужно написать имя и пароль'})
             return render_to_response(template_name, c)
     else:
         if request.user.is_authenticated():
@@ -131,7 +136,7 @@ def addstuff(request):
         f = StuffForm(request.POST, instance=Stuff())
         new_stuff = f.save()
         return HttpResponseRedirect('/new')
-    c = {'form':form, 'user':request.user, 'back':back(request.path), 'modif':'Добавить'}
+    c = {'form':form, 'user':request.user, 'back':back(request.path), 'page_name':u'Добавление в список', 'modif':'Добавить'}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 
