@@ -134,7 +134,7 @@ ALTER SEQUENCE auth_message_id_seq OWNED BY auth_message.id;
 -- Name: auth_message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('auth_message_id_seq', 11, true);
+SELECT pg_catalog.setval('auth_message_id_seq', 53, true);
 
 
 --
@@ -266,7 +266,7 @@ ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('auth_user_id_seq', 3, true);
+SELECT pg_catalog.setval('auth_user_id_seq', 21, true);
 
 
 --
@@ -307,7 +307,7 @@ ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permiss
 -- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 20, true);
 
 
 --
@@ -354,7 +354,7 @@ ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 11, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 56, true);
 
 
 --
@@ -456,7 +456,7 @@ ALTER SEQUENCE orders_stuff_id_seq OWNED BY orders_stuff.id;
 -- Name: orders_stuff_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('orders_stuff_id_seq', 2048, true);
+SELECT pg_catalog.setval('orders_stuff_id_seq', 2053, true);
 
 
 --
@@ -473,9 +473,9 @@ CREATE TABLE orders_wish (
     user_id integer NOT NULL,
     urgent boolean NOT NULL,
     status character varying(1) NOT NULL,
-    comment text NOT NULL,
+    comment text,
     currency_man character varying(3) DEFAULT 'RUR'::character varying NOT NULL,
-    currency_rus character varying(3) DEFAULT 'RUR'::character varying NOT NULL,
+    currency_rus character varying(3) DEFAULT 'RUR'::character varying,
     total numeric(1000,2)
 );
 
@@ -507,7 +507,7 @@ ALTER SEQUENCE orders_wish_id_seq OWNED BY orders_wish.id;
 -- Name: orders_wish_id_seq; Type: SEQUENCE SET; Schema: public; Owner: annndrey
 --
 
-SELECT pg_catalog.setval('orders_wish_id_seq', 7, true);
+SELECT pg_catalog.setval('orders_wish_id_seq', 40, true);
 
 
 --
@@ -651,9 +651,25 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY auth_user (id, username, first_name, last_name, email, password, is_staff, is_active, is_superuser, last_login, date_joined) FROM stdin;
-3	guest				sha1$e0e9d$abe2e7fcf9408f235344a2ced961ab09dd9b79bc	f	t	f	2011-10-17 15:42:13.124074+04	2011-10-07 22:32:26.527031+04
-2	user				sha1$a10b3$63e1d14cbd178e9fcc7c84b4c2b311bccc0cefd2	f	t	f	2011-10-17 16:11:22.572778+04	2011-10-05 13:18:56.141442+04
-1	annndrey			gontchar@gmail.com	sha1$3d356$f334b5efdbd12ee80f3ea083f8c83f17e7bcd772	t	t	t	2011-10-17 20:03:56.707535+04	2011-10-03 14:49:49.923384+04
+10	alenavk	Алёна		alenavk@igb.ac.ru	sha1$91c94$da4c05500d4da8adde4b065fb113d5074f0f936b	f	t	f	2011-12-15 20:49:04+04	2011-12-15 20:49:04+04
+15	bcl2	Лёша		bcl2@mail.ru	sha1$68814$e6d8840a7cf1e65660a2f5b83531c290b97df911	f	t	f	2011-12-15 20:50:40+04	2011-12-15 20:50:40+04
+19	elenlys	Лена		elenlys@gmail.com	sha1$885cd$61e2ac68500bbf978ada8b3ad320bc5ec4718ad6	f	t	f	2011-12-15 20:51:35+04	2011-12-15 20:51:35+04
+6	eszakh	Елена Сергеевна		eszakh@gmail.com	sha1$586f5$f6b56bb96cd4575f74d48b462dc198055eac4b63	f	t	f	2011-12-15 20:47:36+04	2011-12-15 20:47:36+04
+20	galina-mansurova	Галина Валерьевна		galina-mansurova@yandex.ru	sha1$cf7fc$8b8957d8cc2eee4ff5fedd0a365d6766a4815c32	f	t	f	2011-12-15 20:51:54+04	2011-12-15 20:51:54+04
+17	igorvk	Игорь		igorvk@igb.ac.ru	sha1$790d4$3ea3909e380f2dd99a05906c4881f3ff1f5a9c67	f	t	f	2011-12-15 20:51:10+04	2011-12-15 20:51:10+04
+14	ivanova	Тамара Константиновна		ivanova@genebiology.ru	sha1$d00c8$aaaa6e3924d40dfb99c3bddf9006a082ad40a3c6	f	t	f	2011-12-15 20:50:09+04	2011-12-15 20:50:09+04
+7	kv.kulikova	Ксения		kv.kulikova@gmail.com	sha1$e991d$c28bfa4eb9a0a43348f97b392e4baf5581fa04f8	f	t	f	2011-12-15 20:47:55+04	2011-12-15 20:47:55+04
+16	lubabubbask	Люба		lubabubbask@rambler.ru	sha1$df774$e6f1b06ae5c8092c4ef04286e3fc8f35f2f4affe	f	t	f	2011-12-15 20:50:57+04	2011-12-15 20:50:57+04
+4	lyuba_s	Любовь Ефимовна		lyuba_s@list.ru	sha1$26c06$efaacbe437ff6d660ade9368dadad2a14d622ab5	f	t	f	2011-12-15 20:46:33+04	2011-12-15 20:46:33+04
+18	mlukashina	Марина		mlukashina@mail.ru	sha1$e76c9$06db81682893559bb7b09296efe60aa4d9e940f0	f	t	f	2011-12-15 20:51:23+04	2011-12-15 20:51:23+04
+8	mshepelev	Миша		mshepelev@mail.ru	sha1$de5ae$9cd9193cb594df06f33a545dba02dbb212007285	f	t	f	2011-12-15 20:48:38+04	2011-12-15 20:48:38+04
+5	nina.kazilo	Ниночка		nina.kazilo@gmail.com	sha1$5fc60$8af8bca101b209dbb36c42b740ba033ae01136fe	t	t	f	2011-12-15 20:47:15+04	2011-12-15 20:47:15+04
+12	polina266	Полина		polina266@gmail.com	sha1$46a24$81a814223587209e58a2436f49c480482db51985	f	t	f	2011-12-15 20:49:39+04	2011-12-15 20:49:39+04
+11	polyakoirina	Ирина Николаевна		polyakoirina@yandex.ru	sha1$fe069$26302f0bb53b727607272d3ca1e6f3987aebf0c1	f	t	f	2011-12-15 20:49:26+04	2011-12-15 20:49:26+04
+9	sergei_larin	Сергей Сергеевич		sergei_larin@mail.ru	sha1$b4034$0789c50389fffb4a8b64946fcec33cb63d01672f	t	t	f	2011-12-15 20:48:52+04	2011-12-15 20:48:52+04
+13	skalin	Света		skalin@rambler.ru	sha1$8be87$ebbe7b504c2e47b9fe61d56547466ea8175ce204	f	t	f	2011-12-15 20:49:52+04	2011-12-15 20:49:52+04
+21	sposwjat	Сандра		sposwjat@yandex.ru	sha1$510b7$7e5ba18cf0770384437bebacda18cdc659a3bb60	t	t	f	2011-12-15 21:14:45.41854+04	2011-12-15 20:52:08+04
+1	annndrey			gontchar@gmail.com	sha1$3d356$f334b5efdbd12ee80f3ea083f8c83f17e7bcd772	t	t	t	2011-12-15 20:44:51.766192+04	2011-10-03 14:49:49.923384+04
 \.
 
 
@@ -670,6 +686,16 @@ COPY auth_user_groups (id, user_id, group_id) FROM stdin;
 --
 
 COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+11	9	19
+12	9	20
+13	9	21
+14	9	22
+15	9	23
+16	9	24
+17	21	24
+18	21	20
+19	21	21
+20	21	23
 \.
 
 
@@ -689,6 +715,51 @@ COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, obj
 9	2011-10-07 22:32:26.575946+04	1	3	3	guest	1	
 10	2011-10-07 22:32:59.10737+04	1	8	7	Пожелание №7, среда культуральная DMEM (0,5 л) [Новое]	1	
 11	2011-10-11 15:18:06.111734+04	1	8	7	Пожелание №7, среда культуральная DMEM (0,5 л) [Новое]	3	
+12	2011-10-28 17:07:55.341362+04	1	8	8	Пожелание №8, среда культуральная CD OptiCHO (1000 ml) [Новое]	1	
+13	2011-12-12 22:56:19.409058+04	1	7	2050	Подарок у Дедушки Мороза ()	3	
+14	2011-12-13 00:24:52.484122+04	1	7	2053	qwe ()	3	
+15	2011-12-13 00:24:52.486378+04	1	7	2052	wer ()	3	
+16	2011-12-13 00:24:52.487465+04	1	7	2051	Аппарат для вертикального электрофореза  ()	3	
+17	2011-12-15 20:45:25.687816+04	1	3	3	guest	3	
+18	2011-12-15 20:45:25.708503+04	1	3	2	user	3	
+19	2011-12-15 20:46:33.970566+04	1	3	4	lyuba_s	1	
+20	2011-12-15 20:47:15.193332+04	1	3	5	nina.kazilo	1	
+21	2011-12-15 20:47:36.887987+04	1	3	6	eszakh	1	
+22	2011-12-15 20:47:55.095229+04	1	3	7	kv.kulikova	1	
+23	2011-12-15 20:48:38.413954+04	1	3	8	mshepelev	1	
+24	2011-12-15 20:48:52.149591+04	1	3	9	sergei_larin	1	
+25	2011-12-15 20:49:04.515129+04	1	3	10	alenavk	1	
+26	2011-12-15 20:49:26.987284+04	1	3	11	polyakoirina	1	
+27	2011-12-15 20:49:39.512964+04	1	3	12	polina266	1	
+28	2011-12-15 20:49:52.096804+04	1	3	13	skalin	1	
+29	2011-12-15 20:50:09.256349+04	1	3	14	ivanova	1	
+30	2011-12-15 20:50:40.407407+04	1	3	15	bcl2	1	
+31	2011-12-15 20:50:57.070595+04	1	3	16	lubabubbask	1	
+32	2011-12-15 20:51:10.261252+04	1	3	17	igorvk	1	
+33	2011-12-15 20:51:23.172267+04	1	3	18	mlukashina	1	
+34	2011-12-15 20:51:35.756721+04	1	3	19	elenlys	1	
+35	2011-12-15 20:51:54.652504+04	1	3	20	galina-mansurova	1	
+36	2011-12-15 20:52:08.209073+04	1	3	21	sposwjat	1	
+37	2011-12-15 21:01:45.025828+04	1	3	21	sposwjat	2	Изменен is_staff и user_permissions.
+38	2011-12-15 21:03:17.555406+04	1	3	9	sergei_larin	2	Изменен is_staff и user_permissions.
+39	2011-12-15 21:04:57.802996+04	1	3	10	alenavk	2	Изменен first_name и email.
+40	2011-12-15 21:05:19.411001+04	1	3	15	bcl2	2	Изменен first_name и email.
+41	2011-12-15 21:05:43.673814+04	1	3	19	elenlys	2	Изменен first_name и email.
+42	2011-12-15 21:06:02.392163+04	1	3	6	eszakh	2	Изменен first_name и email.
+43	2011-12-15 21:06:18.759+04	1	3	20	galina-mansurova	2	Изменен first_name и email.
+44	2011-12-15 21:06:53.213291+04	1	3	17	igorvk	2	Изменен first_name и email.
+45	2011-12-15 21:07:31.156763+04	1	3	14	ivanova	2	Изменен first_name и email.
+46	2011-12-15 21:07:50.394878+04	1	3	7	kv.kulikova	2	Изменен first_name и email.
+47	2011-12-15 21:08:05.675013+04	1	3	16	lubabubbask	2	Изменен first_name и email.
+48	2011-12-15 21:08:28.096785+04	1	3	4	lyuba_s	2	Изменен first_name и email.
+49	2011-12-15 21:08:42.922025+04	1	3	18	mlukashina	2	Изменен first_name и email.
+50	2011-12-15 21:09:04.487145+04	1	3	8	mshepelev	2	Изменен first_name и email.
+51	2011-12-15 21:09:33.694028+04	1	3	5	nina.kazilo	2	Изменен first_name, email и is_staff.
+52	2011-12-15 21:09:47.317671+04	1	3	12	polina266	2	Изменен first_name и email.
+53	2011-12-15 21:10:08.884355+04	1	3	11	polyakoirina	2	Изменен first_name и email.
+54	2011-12-15 21:12:13.131644+04	1	3	9	sergei_larin	2	Изменен first_name и email.
+55	2011-12-15 21:12:28.405778+04	1	3	13	skalin	2	Изменен first_name и email.
+56	2011-12-15 21:13:14.552367+04	1	3	21	sposwjat	2	Изменен first_name и email.
 \.
 
 
@@ -725,10 +796,51 @@ c31dbf85a9acfc030aff477bde622e2a	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmd
 94c3fd153732942871ad611ac057758b	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-21 20:28:05.636372+04
 a9ce117db0265233c82ad878aa69a351	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-20 15:51:08.21535+04
 6d96a966d7dd0dcc5f35c11e79631eb3	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-22 00:45:43.202849+04
+3f6d7c175a2fc759f802e6b1cf8ab099	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-07 23:27:21.245714+04
 8aff405fba3569907c98b39d4a9050aa	gAJ9cQEuZjllZGI1OGM5MzMwMWExYmIzYmUxYjgwYWFjNGEwOWE=\n	2011-10-19 20:49:28.308155+04
 1ee465016cd98eba86bfe47d5570c019	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-19 23:24:39.800609+04
 06ae1c34f8b0dfc8bad16b04647afc54	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwJ1LjlkODZmYmUyYzdhYTFlZDg3Njdj\nYzYxODgxNDgyZjVj\n	2011-10-31 16:11:22.581272+04
 3d3a91669979307376a28cf07304e3b7	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-10-31 20:03:56.768957+04
+efff30c0df95b2d722b0783a52889cc4	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-10 22:01:46.717224+04
+23764d25a5de3e7940c60063f77df8c8	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-10 23:31:50.208255+04
+a3ed03ff3800ef00b84be3a044d237b0	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-04 23:30:47.453083+04
+c24a186b76ea5d90ac42e14851445d97	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-10 23:40:37.37833+04
+85771990cdabd1e8ff1e12f872940932	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-11 14:39:09.596126+04
+b5312a842268b87183e7fdfeb5779046	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-14 22:19:11.145778+04
+033b8c1be739e4654896c30c3b46971e	gAJ9cQEuZjllZGI1OGM5MzMwMWExYmIzYmUxYjgwYWFjNGEwOWE=\n	2011-11-11 17:20:29.809503+04
+12e2453b37e8eb11a86db0586978f455	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-11 23:57:07.647348+04
+9ef511f85d87aa5686ecc785ee1e23e0	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-14 22:24:10.534277+04
+ecc42c4e428ffcb9ba3cd7ab8a0ab7fb	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-14 22:53:45.845326+04
+80e0836d20ee9ee44710b57053f6d35a	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-14 22:51:35.965161+04
+8651e2e1e7ba00bc24ca4830b6dcb791	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwJ1LjlkODZmYmUyYzdhYTFlZDg3Njdj\nYzYxODgxNDgyZjVj\n	2011-11-18 17:18:26.90917+04
+f4e543128841454bd27e9d7f5241d41b	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LmYzNTk4MzVmNTVmM2I5NDk4NmQx\nODc4NTk5ODA2Yjlm\n	2011-11-18 17:19:05.409386+04
+7beb122f0e9a3af2be5adfc5ddae02f2	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-18 23:51:14.928835+04
+f192071ecf6b6a22e0c795646a1803ca	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-18 23:56:27.026785+04
+84e6aa5848133b3b39f93fb4b45a5e08	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-19 10:20:35.518685+04
+201079dc60a10a7191638674b80aebdd	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-19 16:36:48.171675+04
+3c7e411270e379051aa5a60ce3597573	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-20 17:31:56.091838+04
+c8c5d3918f1f29ca287a0f254f425f9d	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-20 17:45:15.590163+04
+1ac5cffcafa3796a83c5eb36c48a6323	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-20 18:30:06.23153+04
+904334ada5b9b0a350e069b8c612bd4a	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-22 16:12:09.636215+04
+92cf12cb8262f1d3d500e44c42739241	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-22 17:01:42.555613+04
+7338fb756916c945286a1f2ffa73f892	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-23 22:37:46.60753+04
+714aecac8c43db4c0cbd3c4b2d234c34	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-11-29 17:05:53.817149+04
+92201a80bec875596fd4a6f0ef812ec2	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-05 20:53:00.44495+04
+6e6f42fa302fa323985154cc4b195fe5	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-06 12:58:44.519603+04
+7b1c644e85254141d2d515036769e7d9	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-06 13:02:36.130298+04
+65d047c35b9107c256bbaa4302160d7e	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-21 12:08:45.763595+04
+0be068077c192da0db1fd197054c4d21	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-21 19:56:34.393696+04
+2e939d18035dfd112f8e08f021653a24	gAJ9cQEoVQp0ZXN0Y29va2llcQJVBndvcmtlZHEDVRJfYXV0aF91c2VyX2JhY2tlbmRxBFUpZGph\nbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBVUNX2F1dGhfdXNlcl9pZHEG\nSxV1LjQ5ZWEwMWVlZjQxYzE1ZjliNmIzYWRhMjA1Y2UwZTRm\n	2011-12-29 21:14:45.427264+04
+714ff8c6fd3abd03c91e2b2c869cf084	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-25 00:58:19.137036+04
+79d098f663ad9c9ddf4fb5d9f5e54f6e	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-29 01:48:25.067402+04
+de07c8bf5ed84b34085b1776cf1fe512	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-21 16:02:31.457166+04
+95a3bd4e4b28c87f87d801539217394f	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-26 18:59:39.884672+04
+ad0f355f3f70af414c349916226c7478	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-26 22:26:10.449819+04
+488ba80ca79895917b5f8a1a4c28bca6	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-26 22:30:04.98216+04
+d5a6feeebbe54aeabf77fc158ddac981	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-27 21:07:19.85866+04
+aaefa8a4242ffc911c9d5c3384d679f6	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-28 20:08:02.811369+04
+035ad4f90cc329d7ac996c2d736821e0	gAJ9cQEuZjllZGI1OGM5MzMwMWExYmIzYmUxYjgwYWFjNGEwOWE=\n	2011-12-27 01:46:04.297902+04
+8a6fa0ea999859a94b4029b9967c0f32	gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwF1LjM5NjA4NTJjOGM3NjY1YThkNWFm\nNzQzYWE1ZmMxOGZl\n	2011-12-28 22:24:40.086532+04
 \.
 
 
@@ -1387,6 +1499,7 @@ COPY orders_stuff (id, name_rus, name_exact, manuf, man_site, cat_num, package, 
 2046	набор реагентов для амплицикации ДНК	GenePak® PCR Core	Isogene Lab. Ltd	\N	U1010-08	12*8	F	\N
 2047	ДНКаза 	Deoxyribonuclease I from bovine pancreas\nStandardized vial containing 2,000 Kunitz units of DNase I (D4527), vial of ≥0.5 mg total protein	Sigma	\N	D4263-5VL	5*0,5g	F	\N
 2048	пленка лабораторная	DuraSeal™ laboratory stretch film roll size 4 in. × 250 ft	Sigma	\N	D3172-1EA	1.0	U	\N
+2049	Кот в мешке	Кот черный в холщевом мешке, запакованный	Укладочно-фасовочный завод им. Ю. Куклачева			1	U	шт
 \.
 
 
@@ -1395,12 +1508,14 @@ COPY orders_stuff (id, name_rus, name_exact, manuf, man_site, cat_num, package, 
 --
 
 COPY orders_wish (id, stuff_id, pieces, price_man, price_rus, order_date, user_id, urgent, status, comment, currency_man, currency_rus, total) FROM stdin;
-2	1454	50	12.00	\N	2011-10-06 15:53:53.680615+04	2	t	N	Чашечки тоже закончились	RUR	RUR	\N
-3	1793	1	5555555.00	\N	2011-10-06 15:54:48.767124+04	2	f	N	пригодится	RUR	RUR	\N
-1	1405	2	222.00	312.00	2011-10-06 16:36:32.855746+04	2	t	R	хотелось бы побыстрее...	RUR	RUR	\N
-4	1733	100	15.00	\N	2011-10-06 16:46:53.19467+04	1	t	N	празднуем ДР!!!	RUR	RUR	\N
-5	1409	23	300.00	\N	2011-10-07 17:20:53.490868+04	1	t	N	О глутаминъ!	RUR	RUR	\N
 6	1425	2	34.00	\N	2011-10-07 17:24:24.387215+04	1	f	N	с помощью гентамицина мы сможем открыть Врата Гираша!	RUR	RUR	\N
+17	1418	12	23.00	23.00	2011-11-04 17:18:14.305888+04	1	t	N	22	RUR	RUR	\N
+26	2049	1	12.00	\N	2011-12-07 13:50:18.494464+04	1	f	N	Мыши атакуют запасы зерна, срочно нужен кот!	RUR	RUR	\N
+10	1409	23	300.00	\N	2011-12-13 00:11:46.72441+04	1	t	N	О глутаминъ!	RUR	RUR	\N
+36	1406	123	22.00	\N	2011-12-13 00:22:03.591566+04	1	t	N		RUR	RUR	\N
+12	1417	321	22.00	\N	2011-12-13 01:32:11.960709+04	1	f	R	123	RUR	RUR	\N
+14	1427	3	35.00	37.00	2011-12-14 22:18:57.799259+04	1	f	D	Этанолъ!!!1	RUR	RUR	\N
+40	1475	1	22.00	\N	2011-12-14 23:38:03.423178+04	1	f	N		RUR	RUR	\N
 \.
 
 
