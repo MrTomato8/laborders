@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='login'>
+  
+  <div class='login-wr'>
+  <form action='.' method='post'>
+    <center>Логин: <input type="text" name="username" value="" id="username"></center>
+    <center>Пароль:<input type="password" name="password" value="" id="password"></center>
+    <center><input type="submit" value="войти" /></center>
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+    {% csrf_token %}
+  </form>
+    {% if login_error %}
+    <div class="error">{{ login_error }}</div>
+      {% endif %}
+</div>
+    </div>
+
+
+
+{% endblock %}

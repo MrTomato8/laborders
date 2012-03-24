@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{%block links %}
+<br><a href='/'>[Главная]</a>
+{% endblock %}
+{% block content %}
+
+<p>{{ err|safe }}</p>
+<form action='' method="POST">
+<p align='center'>Мое сообщение:</p>
+<p align='center'><textarea name='comment' rows="15" cols="50"></textarea></p>
+<p align='center'><input type="submit" value="послать"></p>
+{% csrf_token %}
+</form>
+{% endblock %}

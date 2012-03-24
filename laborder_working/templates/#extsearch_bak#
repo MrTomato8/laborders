@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_name }}{% endblock %}
+{% block content %}
+<a href='/'>Назад</a>
+
+<form action="/wishes" method="get">
+
+{% for field in wish %}
+{{ field.errors }}
+{% endfor %}
+{% for field in stuff %}
+{{ field.errors }}
+{% endfor %}
+
+Параметры объекта
+<p>{{ stuff.stgroup.label_tag }} {{ stuff.stgroup }}</p>
+<p>{{ stuff.name_exact.label_tag }} {{ stuff.name_exact }}</p>
+<p>{{ stuff.name_rus.label_tag }} {{ stuff.name_rus }}</p>
+<p>{{ stuff.manuf.label_tag }} {{ stuff.manuf }}</p>
+<p>{{ stuff.man_site.label_tag }} {{ stuff.man_site }}</p>
+<p>{{ stuff.cat_num.label_tag }} {{ stuff.cat_num }}</p>
+<p>{{ stuff.package.label_tag }} {{ stuff.package }}</p>
+<p>{{ stuff.measure.label_tag }} {{ stuff.measure }}</p>
+<hr>
+Параметры заказа
+<p>{{ wish.pieces.label_tag }} {{ wish.pieces }}</p>
+<p>{{ wish.price_man.label_tag }} {{ wish.price_man }}</p>
+<p>{{ wish.currency_man.label_tag }} {{ wish.currency_man }}</p>
+<p>{{ wish.price_rus.label_tag }} {{ wish.price_rus }}</p>
+<p>{{ wish.currency_rus.label_tag }} {{ wish.currency_rus }}</p>
+<p>{{ wish.order_date.label_tag }} {{ wish.order_date }}</p>
+{% if user.is_staff %} <p>{{ wish.user.label_tag }} {{ wish.user }}</p> {% endif %}
+<p>{{ wish.urgent.label_tag }} {{ wish.urgent }}</p>
+<p>{{ wish.status.label_tag }} {{ wish.status }}</p>
+<p>{{ wish.comment.label_tag }} {{ wish.comment }}</p>
+
+<input type="Submit" value="Найти">
+
+</form>
+{% endblock %}

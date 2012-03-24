@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_name }}{% endblock %}
+
+{% block content %}
+<div class="content">
+<a href='/{{ back }}'><img src='/static/picts/back.png' height=60></a>
+<form action='' method="POST">
+
+{% if user.is_staff %}
+
+<div class='wishwrap'>
+
+    <div class='wish-h'>
+  <label for="{{ form.status.auto_id }}">
+  <b>{{ form.status.label_tag }}</label></b>
+    </div>
+
+    <div class='wish-v'>
+  {{ form.status }}
+    </div>
+    
+</div>
+
+{% endif %}
+
+
+{% for field in form %}
+{% if field.label != "Фактическая цена" and field.label != "Валюта"%}
+<div class='wishwrap'>
+
+      {% if field.label != "Пользователь" and field.label != "Статус пожелания" %}
+      <div class='wish-h'>
+      <label for="{{ field.auto_id }}">{% if field.field.required %}<b>{% endif %}{{ field.label_tag }}{% if field.field.required %}</b>{% endif %}
+      {% if field.label == "Оборудование" %}<a href=/addstuff>[Добавить новое]</a>{% endif %}
+      </label>
+    </div>
+
+    <div class='wish-v'>
+      {{ field|safe }}
+    </div>  
+
+    {% else %}
+          {% if not uid %}
+    <input type="hidden" name='user' id='id_user' value='{{ user.id }}'>
+	  {% else %}
+    <input type="hidden" name='user' id='id_user' value='{{ uid }}'>
+	  {% endif %}
+	  {% if not user.is_staff %}
+    <input type="hidden" name='status' id='id_status' value='{{ wstat }}'>
+	  {% endif %}
+      {% endif %}
+    
+</div>
+{% endif %}
+{% endfor %}
+
+{% csrf_token %}
+<div class='add'>
+<input type='submit' value='{{ modif }}'>
+</div>
+</form>
+</div>
+{% endblock %}

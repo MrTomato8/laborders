@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='content'>
+{% if status %}
+   <p>Запись {{ status }}</p>
+{% endif %}
+
+{% if back %}
+<a href='/'>Назад</a>
+{% endif %}
+
+<p>
+<form action="." method='get'>
+<input type='text' name='ssearch'></input>
+<input type='submit' value='Найти'>
+<!--<span><a href='/extsearch'>Расширенный поиск</a></span>-->
+</form>
+</p>
+
+<br>
+
+{% if user.is_authenticated %}
+<table id="wishTable" class="tablesorter">
+  <thead>
+    <tr align='center'>
+      <th>Название</th>
+      <th>Точное название</th>
+      <th>Производитель</th>
+      <th>Каталожный номер</th>
+      <th>Фасовка</th>
+      <th>Количество</th>
+      <th>Имя пользователя</th>
+      <th>Срочность</th>
+      <th>Ссылка</th>
+      <th>Комментарий</th>
+      <th>Статус</th>
+      <th>Цена за ед.</th>
+      <th>Всего</th>
+      <th>Дата заказа</th>
+      <th></th>
+    </tr>
+    </thead>
+  <tbody>
+    {% for item in wishes %}
+  <tr align='center'>
+    <td>{{ item.stuff.name_rus }} </td>
+    <td>{{ item.stuff.name_exact }} </td>
+    <td>{{ item.stuff.manuf }} </td>
+    <td>{{ item.stuff.cat_num }} </td>
+    <td>{{item.stuff.package }}</td>
+    <td>{{ item.pieces }}</td>
+    <td>{% if user.username == item.user.username %} {{ item.user.first_name }} {% else %} {% if user.is_staff %} {{ item.user.first_name }} {% endif %} {% endif %}</td>
+    <td>{% if item.urgent %}<div style="display:none">1</div><img src='/static/picts/urgent.png' width=20>{% endif %}</td>
+    <td>{% if item.stuff.man_site %} {{ item.stuff.man_site|urlize }} {% endif %} </td>
+    <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
+    <td>{{ item.get_status_display }}</td>
+    <td>{{ item.price_man }} {{ item.currency_man }}</td>
+    <td>{{ item.total }} {{ item.currency_man }}</td>
+    <td>{{ item.order_date|date:'d/m/y' }}</td>
+    <td>{% if user == item.user or user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
+    <td>{% if user == item.user or user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
+  </tr>
+  {% endfor %}
+  
+  {% for item in other_wishes %}
+  <tr align='center'>
+    <td>{{ item.stuff.name_rus }}</td>
+    <td>{{ item.stuff.name_exact }} </td>
+    <td>{{ item.stuff.manuf }} </td>
+    <td>{{ item.stuff.cat_num }} </td>
+    <td>{{item.stuff.package }}</td>
+    <td>{{ item.pieces }}</td>
+    <td>{% if user.is_staff %} {{ item.user.first_name }} {% endif %}</td>
+    <td>{% if item.urgent %}<div style="display:none">1</div><img src='/static/picts/urgent.png' width=20>{% endif %}</td>
+    <td>{% if item.stuff.man_site %} {{ item.stuff.man_site|urlize }} {% endif %} </td>
+    <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
+    <td>{{ item.get_status_display }}</td>
+    <td>{{ item.price_man }} {{ item.currency_man }}</td>
+    <td>{{ item.total }} {{ item.currency_man }}</td>
+    <td>{{ item.order_date|date:'d/m/y' }}</td>
+    <td>{% if user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
+    <td>{% if user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
+  </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+</div>
+{% endblock %}
