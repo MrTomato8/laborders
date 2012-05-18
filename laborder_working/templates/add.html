@@ -25,6 +25,7 @@
 {% endif %}
 
 
+
 {% for field in form %}
 {% if field.label != "Фактическая цена" and field.label != "Валюта"%}
 <div class='wishwrap'>
@@ -32,7 +33,7 @@
       {% if field.label != "Пользователь" and field.label != "Статус пожелания" %}
       <div class='wish-h'>
       <label for="{{ field.auto_id }}">{% if field.field.required %}<b>{% endif %}{{ field.label_tag }}{% if field.field.required %}</b>{% endif %}
-      {% if field.label == "Оборудование" %}<a href=/addstuff>[Добавить новое]</a>{% endif %}
+      {% if field.label == "Оборудование" %}<a href=/addstuff>[Добавить новое]</a><a href="/admin/orders/stuff/{{ stuff_id }}">{{ stuff_id }}</a>{% endif %}
       </label>
     </div>
 

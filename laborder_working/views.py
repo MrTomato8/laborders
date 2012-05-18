@@ -127,16 +127,13 @@ def delete(request, num):
 @login_required()
 def edit(request, num):
     wish = Wish.objects.get(id=num)
-    print dir(wish)
-
     form = WishForm(instance=wish)
-    print wish.status
+
     if request.method == 'POST':
         f = WishForm(request.POST, instance=wish)
         f.save()
-
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'user':request.user, 'title':u'Правка записи {0}, краткое название: {1}'.format(num, wish.stuff.name_rus), 'page_name':u'Правка записи {0}, краткое название: {1}'.format(num, wish.stuff.name_rus), 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id}
+    c = {'form':form, 'user':request.user, 'title':u'Правка записи {0}, краткое название: {1}'.format(num, wish.stuff.name_rus), 'page_name':u'Правка записи {0}, краткое название: {1}'.format(num, wish.stuff.name_rus), 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id, 'stuff_id':wish.stuff_id}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 

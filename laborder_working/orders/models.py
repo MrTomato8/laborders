@@ -63,7 +63,7 @@ class Stuff(models.Model):
 
     def __unicode__(self):
         #get_FOO_display() - для отображения значений полей с выбором
-        return u"{0} ({1})".format(self.name_rus, self.package)
+        return u"{0} ({1})".format(self.name_rus, self.cat_num)
 
 class Wish(models.Model):
     """
