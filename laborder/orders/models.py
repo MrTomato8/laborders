@@ -24,6 +24,7 @@ status_choices = (
     #('P', 'В рассмотрении'), #Pending лишнее
     ('A', 'Одобрено'), #Approved
     ('R', 'Отклонено'), #Rejected
+    ('O', 'Заказано'),
     #('O', 'Ожидание счета'), #waiting for Order лишнее
     #('D', 'Ожидание поставки'), #waiting for Delivery лишнее
     #('R', 'Частично получен'), #partially Received лишнее
@@ -48,7 +49,7 @@ class Stuff(models.Model):
     Класс для списка оборудования,
     когда-либо заказывавшегося
     """
-    name_rus = models.CharField("название", max_length=300)
+    name_rus = models.CharField("русское название", max_length=300)
     name_exact = models.CharField("точное название", max_length=200)
     manuf = models.CharField("производитель", max_length=100)
     man_site = models.URLField("сайт производителя", blank=True, null=True)
@@ -63,7 +64,7 @@ class Stuff(models.Model):
 
     def __unicode__(self):
         #get_FOO_display() - для отображения значений полей с выбором
-        return u"{0} ({1})".format(self.name_rus, self.package)
+        return u"{0} ({1})".format(self.name_rus, self.cat_num)
 
 class Wish(models.Model):
     """
@@ -73,7 +74,7 @@ class Wish(models.Model):
     stuff = models.ForeignKey(Stuff, verbose_name="оборудование")
     pieces = models.IntegerField("количество")
     price_man = models.DecimalField("цена производителя", max_digits=1000, decimal_places=2, blank=True, null=True)
-    currency_man = models.CharField("валюта производителя", max_length=3, default='RUR', choices=currency_choices)
+    currency_man = models.CharField("валюта производителя", max_length=3, default='RUR', choices=currency_choices, blank=True, null=True )
     price_rus = models.DecimalField("фактическая цена", max_digits=1000, decimal_places=2, blank=True, null=True)
     currency_rus = models.CharField("валюта", max_length=3, default='RUR', choices=currency_choices, blank=True, null=True)
     order_date = models.DateTimeField("дата заказа", auto_now=True)
@@ -84,6 +85,7 @@ class Wish(models.Model):
 
     def total(self):
         return self.price_man * self.pieces
+
     class Meta:
         verbose_name = 'пожелание'
         verbose_name_plural = 'пожелания'
