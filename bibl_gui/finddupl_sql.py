@@ -10,7 +10,7 @@ import datetime
 
 sttime = datetime.datetime.now()
 print "It started at", sttime
-conn = psycopg2.connect("dbname='%s' user='%s' host='%s' port=%d  password='%s'" % ('bibliography', 'annndrey', 'localhost', 5432, 'andreygon'))
+conn = psycopg2.connect("dbname='%s' user='%s' host='%s' port=%d  password='%s'" % ('bibliography', 'user', 'localhost', 5432, '***'))
 cur = conn.cursor()
 sim_query = """select distinct name_orig, similarity(name_orig, %s) as sim from articles where name_orig %% %s and name_orig != %s order by sim desc limit 5"""
 name_query = "select distinct name_orig from articles order by name_orig asc"

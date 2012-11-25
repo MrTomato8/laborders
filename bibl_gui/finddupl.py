@@ -48,7 +48,7 @@ def calculate_ratios(strings, threshold):
 
 sttime = datetime.datetime.now()
 print "It started at", sttime
-conn = psycopg2.connect("dbname='%s' user='%s' host='%s' port=%d  password='%s'" % ('bibliography', 'annndrey', 'localhost', 5432, 'andreygon'))
+conn = psycopg2.connect("dbname='%s' user='%s' host='%s' port=%d  password='%s'" % ('bibliography', 'user', 'localhost', 5432, '***'))
 cur = conn.cursor()
 cur.execute("select lower(name_orig), lower(authors), year from articles")
 a = cur.fetchall()

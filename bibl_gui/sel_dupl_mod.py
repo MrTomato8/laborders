@@ -12,9 +12,9 @@ import psycopg2, time
 from pg import escape_string
 
 dbname = "bibliography"
-user = 'annndrey'
+user = 'user'
 host = "localhost"
-passwd = "andreygon"
+passwd = "***"
 
 col='source'
 

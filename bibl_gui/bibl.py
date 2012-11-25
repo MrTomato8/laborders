@@ -1411,7 +1411,7 @@ class MainView(QtGui.QMainWindow):
     def report_error(self):
         serv = smtplib.SMTP("smtp.gmail.com",587)
         user = "pybliography@gmail.com"
-        passwd = 'andreygon'
+        passwd = '***'
         
        # msg1 = log.read()
         #print msg1#+ " ".join(log.readlines())

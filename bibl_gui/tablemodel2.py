@@ -7,9 +7,9 @@ import psycopg2
 from search import Ui_Form as SearchUiForm
 
 dbname='bibliography'
-user='annndrey'
+user='user'
 host='localhost'
-password='andreygon'
+password='***'
 cols = ('authors', 'name_orig', 'source', 'editor', 'year', 'language', 'file_path', 'abstract')
 query = 'select authors, name_orig, year from articles'
 

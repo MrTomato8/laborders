@@ -9,7 +9,7 @@ from PyQt4.QtGui import *
 import psycopg2
 
 
-conn = psycopg2.connect("dbname='bibliography' user='annndrey' host='piggy.thruhere.net'  password='andreygon'")
+conn = psycopg2.connect("dbname='bibliography' user='user' host='localhost'  password='***'")
 cur = conn.cursor()
 
 class Table(QTableWidget):
