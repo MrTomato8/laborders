@@ -6,7 +6,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+     ('Andrey Gontchar', 'gontchar@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -15,8 +15,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'laborders',                      # Or path to database file if using sqlite3.
-        'USER': 'annndrey',                      # Not used with sqlite3.
-        'PASSWORD': 'andreygon',                  # Not used with sqlite3.
+        'USER': 'annndrey',#'www-data',                      # Not used with sqlite3.
+        'PASSWORD': 'andreygon',#'Iej6Aew9',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -60,8 +60,9 @@ MEDIA_URL = '/static/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+# Examples: "http://foo.com/media", "/media/".
+#ADMIN_MEDIA_ROOT = os.path.join(SITE_ROOT, 'admin-media')
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'or8$*dk_gctx0t7j$(bh%w*r6)z@$h7qb&g%ra7@36gg4ahbma'
@@ -82,7 +83,7 @@ MIDDLEWARE_CLASSES = (
     #'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'laborder.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -94,15 +95,17 @@ TEMPLATE_DIRS = (
 LOGIN_URL = '/'
 
 SIMPLE_AUTOCOMPLETE_MODELS = ('orders.stuff',)
+#SIMPLE_AUTOCOMPLETE = {'orders.stuff':{'max_items':10},}
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'simple_autocomplete',
+    #'todo',
     #'django.contrib.sites',
     #'django.contrib.messages',
-    'laborder.orders',
+    'orders',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

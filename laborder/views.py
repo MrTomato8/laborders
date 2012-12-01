@@ -2,14 +2,15 @@
 
 from numpy import array
 from django.shortcuts import render_to_response
-from laborder.orders.forms import ContactForm, WishForm, StuffForm
-from django.core.mail import send_mail
+from orders.forms import ContactForm, WishForm, StuffForm
+from django.core.mail import send_mail, mail_admins
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
-from laborder.orders.models import Stuff, Wish
+from orders.models import Stuff, Wish
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 def main(request, template_name='login.html'):
     c = {}
@@ -51,7 +52,24 @@ def extsearch(request):
     wishform = WishForm()
     
     return render_to_response("extsearch.html", {'wish':wishform, 'stuff':stuffform, 'user':request.user, 'page_name':u'Расширенный поиск'})
-    
+
+@login_required()
+def contact(request):
+    if request.POST:
+        message = request.POST.get('comment', None)
+        if len(message) == 0:
+            c = {'page_name':u'Обратная связь', 'user':request.user, 'err':u'Вы пытаетесь отправить пустое сообщение. Напишите хоть что-нибудь.'}
+
+            return render_to_response("contact.html", c)
+        else:
+            msg0 = u"{0} ({1}) передает:\n{2}".format(request.user.first_name, request.user.email, message)
+            send_mail(u"Замечание по работе orders.ogtr.ru", msg0, 'piggy@piggy.thruhere.net', ['gontchar@gmail.com','piggy@piggy.thruhere.net', ], fail_silently=False)
+            c = {'page_name':u'Обратная связь', 'user':request.user, 'err':u'Ваше сообщение отправлено. <a href="/">Вернуться</a> на главную страницу.'}
+            return render_to_response("contact.html", c)
+    c = {'page_name':u'Обратная связь', 'user':request.user}
+    c.update(csrf(request))
+    return render_to_response("contact.html", c)
+
 @login_required()
 def wishes(request, status):
     if request.GET:
@@ -108,16 +126,25 @@ def delete(request, num):
     return HttpResponseRedirect('/wishes')
 
 @login_required()
+def userwish(request, userid):
+    w = Wish.objects.filter(user=userid)
+    uname = User.objects.get(id=userid)
+    c = {'wishes':w, 'page_name':u'Список заказов пользователя %s' % uname.first_name, 'user':request.user, 'status':False, 'new':True, 'back':True}
+    return render_to_response("wishes.html", c)
+
+
+@login_required()
 def edit(request, num):
     wish = Wish.objects.get(id=num)
+
     form = WishForm(instance=wish)
-    print wish.status
+
     if request.method == 'POST':
         f = WishForm(request.POST, instance=wish)
         f.save()
 
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'user':request.user, 'title':u'Правка записи %s' % num, 'page_name':u'Правка записи %s' % num, 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id}
+    c = {'form':form, 'user':request.user, 'title':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'page_name':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id, 'stuff_id':wish.stuff_id}
     c.update(csrf(request))
     return render_to_response("add.html", c)
 

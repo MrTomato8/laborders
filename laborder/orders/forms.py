@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 
 from django import forms
-from laborder.orders.models import Wish, Stuff
+from models import Wish, Stuff
 
 class ContactForm(forms.Form):
     subject = forms.CharField()

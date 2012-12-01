@@ -40,7 +40,7 @@ group_choices = (
     ("I", u"ИФА АВ"),
     ("W", u"Гели Вестерн"),
     ("O", u"Канцелярия"),
-    ("F", u"Ферменты, наборы и т.д."),
+    ("F", u"Феремнты, наборы и т.д."),
     ("U", u"Остальное"),
     )
 
@@ -53,7 +53,7 @@ class Stuff(models.Model):
     name_exact = models.CharField("точное название", max_length=200)
     manuf = models.CharField("производитель", max_length=100)
     man_site = models.URLField("сайт производителя", blank=True, null=True)
-    cat_num = models.CharField("номер в каталоге", max_length=200, blank=True, null=True, unique=True)
+    cat_num = models.CharField("номер в каталоге", max_length=200, blank=True, null=True)
     package = models.CharField("фасовка", max_length=100, blank=True, null=True)
     measure = models.CharField("ед. изм.", max_length=5, blank=True, null=True)
     stgroup = models.CharField("группа", max_length=1, choices=group_choices)
@@ -61,16 +61,9 @@ class Stuff(models.Model):
     class Meta:
         verbose_name = "оборудование"
         verbose_name_plural = "оборудование"
-        ordering = ['name_rus', ]
 
     def __unicode__(self):
         #get_FOO_display() - для отображения значений полей с выбором
-        return u"{0} ({1})".format(self.name_rus, self.cat_num)
-
-    def __str__(self):
-        return u"{0} ({1})".format(self.name_rus, self.cat_num)
-
-    def __repr__(self):
         return u"{0} ({1})".format(self.name_rus, self.cat_num)
 
 class Wish(models.Model):

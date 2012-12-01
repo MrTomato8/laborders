@@ -5,8 +5,8 @@ from django.views.generic.simple import direct_to_template
 from django.conf import settings
 import os
 
-from laborder.settings import DEBUG
-from laborder import views
+from settings import DEBUG
+import views
 
 site_media = os.path.join(os.path.dirname(__file__), 'media')
 
@@ -15,7 +15,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns( 
-    'laborder.views',
+    'views',
     # Example:
     (r'^wishes/(?P<status>\w+)?/?$', views.wishes),
     (r'^extsearch/', views.extsearch),
@@ -25,8 +25,11 @@ urlpatterns = patterns(
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^new/', 'new'),
     (r'^addstuff/', 'addstuff'),
+    (r'^wish/(?P<userid>\d+)/$', 'userwish'),
     (r'^delete/(?P<num>\d+)/$', 'delete'),
     (r'^edit/(?P<num>\d+)/$', 'edit'),
+    (r'^contact/', 'contact'),
+    #(r'^todo/', include('todo.urls')),
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     #главная страница, авторизация, после нее показ 
