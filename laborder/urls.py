@@ -28,6 +28,7 @@ urlpatterns = patterns(
     (r'^wish/(?P<userid>\d+)/$', 'userwish'),
     (r'^delete/(?P<num>\d+)/$', 'delete'),
     (r'^edit/(?P<num>\d+)/$', 'edit'),
+    (r'^status/(?P<st>\w+)/$', 'showstatus'),
     (r'^contact/', 'contact'),
     #(r'^todo/', include('todo.urls')),
     # Uncomment the next line to enable the admin:
