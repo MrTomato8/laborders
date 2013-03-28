@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin
+END
+pdfimages.exe
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/pdfimages.exe
+END
+pdftohtml.exe
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/pdftohtml.exe
+END
+pdftotext.exe
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/pdftotext.exe
+END
+pdffonts.exe
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/pdffonts.exe
+END
+libpoppler-5.dll
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/libpoppler-5.dll
+END
+libpng12-0.dll
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/libpng12-0.dll
+END
+pdfinfo.exe
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/pdfinfo.exe
+END
+libgcc_s_dw2-1.dll
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/libgcc_s_dw2-1.dll
+END
+libjpeg-7.dll
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/libjpeg-7.dll
+END
+libpoppler-glib-4.dll
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/bibl_gui/!svn/ver/226/modules/poppler/bin/libpoppler-glib-4.dll
+END

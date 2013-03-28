@@ -11,20 +11,11 @@
 <script type="text/javascript" src="/static/scripts/tablesorter.js"></script> 
 <script type="text/javascript">
 $(document).ready(function() 
-{ 
-$("#wishTable").tablesorter();
-} 
-);
-
-$("#wishTable").tablesorter({
-  headers: {
-    10: { sorter: "floating" },
-    11: { sorter: "floating" }
-  }
-});
-
+    { 
+        $("#wishTable").tablesorter(); 
+    } 
+); 
 </script>
-
 <script type='text/javascript'>
   function showHide(divId)
   {
@@ -33,15 +24,8 @@ $("#wishTable").tablesorter({
       else
           document.getElementById(divId).style.display = 'block';
   }
-</script>
+  </script>
 
-<script type='text/javascript'>
-function confirmDelete(delUrl) {
-  if (confirm("Are you sure you want to delete")) {
-    document.location = delUrl;
-  }
-}
-</script>
 <title>Laborders</title>
 </head>
 
@@ -59,6 +43,10 @@ function confirmDelete(delUrl) {
 {% block usermessage %}
 
 {% endblock %}
+  Хорошие новости! Нажатием на имя пользователя в таблице<br>
+  можно отображать заказы только этого пользователя. <br>
+  При добавлении нового пожелания в автодополнении теперь отображаются <br>
+  и каталожные номера
 </div>
 
 {% endif %}

@@ -44,7 +44,7 @@ clear:both;
 .wish-v {float:top;}
 
 
-.error { position:absolute;
+.error {position:relative;
          z-index: 5;
          text-align:center;
          min-width:300px;

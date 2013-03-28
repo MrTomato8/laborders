@@ -5,18 +5,6 @@
 {% block content %}
 <div class="content">
 <a href='/{{ back }}'><img src='/static/picts/back.png' height=60></a>
-
-{% if form.errors %}
-  <p>Произошла ошибка :( </p>
-  {% for field in form %}
-  {% if field.errors %}
-<div class='error'>
-  {{ field.errors|striptags  }}
-  </div>
-  {% endif %}
-  {% endfor %}
-  {% endif %}
-  
 <form action='' method="POST">
 
 {% if user.is_staff %}
@@ -25,7 +13,6 @@
 
     <div class='wish-h'>
   <label for="{{ form.status.auto_id }}">
-      
   <b>{{ form.status.label_tag }}</label></b>
     </div>
 
@@ -43,23 +30,14 @@
 <div class='wishwrap'>
 
       {% if field.label != "Пользователь" and field.label != "Статус пожелания" %}
-
-<div class='wish-h'>
-  <label for="{{ field.auto_id }}">{% if field.field.required %}<b>{% endif %}
-  {% if field.errors %}
-  <font color="#FA5858">
-  {% endif %}
-  {{ field.label_tag }}
-  {% if field.errors %}
-  </font>
-  {% endif %}
-  {% if field.field.required %}</b>{% endif %}
-  {% if field.label == "Оборудование" %}<a href=/addstuff>[Добавить новое]</a><a href="/admin/orders/stuff/{{ stuff_id }}">[Править]</a>{% endif %}
-  </label>
-</div>
+      <div class='wish-h'>
+      <label for="{{ field.auto_id }}">{% if field.field.required %}<b>{% endif %}{{ field.label_tag }}{% if field.field.required %}</b>{% endif %}
+      {% if field.label == "Оборудование" %}<a href=/addstuff>[Добавить новое]</a><a href="/admin/orders/stuff/{{ stuff_id }}">[Править]</a>{% endif %}
+      </label>
+    </div>
 
     <div class='wish-v'>
-      {{ field|safe}}
+      {{ field|safe }}
     </div>  
 
     {% else %}
