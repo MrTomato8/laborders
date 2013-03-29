@@ -19,15 +19,16 @@ currency_choices = (
 
 #статусы заказов
 status_choices = (
+    ('B', 'Отложено'),
     ('N', 'Новое'), #New
-    ('D', 'Отложено'), #Delayed
+    #('D', 'Отложено'), #Delayed
     #('P', 'В рассмотрении'), #Pending лишнее
     ('A', 'Одобрено'), #Approved
     ('R', 'Отклонено'), #Rejected
     ('O', 'Заказано'),
     #('O', 'Ожидание счета'), #waiting for Order лишнее
-    #('D', 'Ожидание поставки'), #waiting for Delivery лишнее
-    #('R', 'Частично получен'), #partially Received лишнее
+    ('D', 'Поставлено'), #waiting for Delivery лишнее
+    ('E', 'Выдано пользователю'), #partially Received лишнее
     # и добавить "отложен"
     ('C', 'Выполнено'), #Completed 
     )
@@ -62,16 +63,18 @@ class Stuff(models.Model):
         verbose_name = "оборудование"
         verbose_name_plural = "оборудование"
         ordering = ['name_rus', ]
+        
 
     def __unicode__(self):
         #get_FOO_display() - для отображения значений полей с выбором
-        return u"{0} ({1})".format(self.name_rus, self.cat_num)
+        return u"{0} ( {1}, {2} {3} )".format(self.name_rus, self.cat_num, self.package, self.measure)
 
     def __str__(self):
-        return u"{0} ({1})".format(self.name_rus, self.cat_num)
+        return u"{0} ( {1}, {2} {3} )".format(self.name_rus, self.cat_num, self.package, self.measure)
 
     def __repr__(self):
-        return u"{0} ({1})".format(self.name_rus, self.cat_num)
+        return u"{0} ( {1}, {2} {3} )".format(self.name_rus, self.cat_num, self.package, self.measure)
+
 
 class Wish(models.Model):
     """
@@ -99,6 +102,6 @@ class Wish(models.Model):
         ordering = ['status', '-urgent']
 
     def __unicode__(self):
-        return u"Пожелание №{0}, {1} [{2}]".format(self.id, self.stuff, self.get_status_display())
+        return u"Пожелание №{0}, {1} [ {2} ]".format(self.id, self.stuff, self.get_status_display())
 
 

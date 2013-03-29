@@ -2,20 +2,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="shortcut icon" href="/static/picts/favicon.ico">
+
 <link rel="stylesheet" type="text/css" href="/static/css/style1.css">
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 <link rel="stylesheet" type="text/css" href="/static/css/jquery-ui.css">
-<link rel="shortcut icon" href="/static/picts/favicon.ico">
-<script type="text/javascript" src="/static/scripts/jquery.js"></script>
-<script type="text/javascript" src="/static/scripts/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/static/scripts/tablesorter.js"></script> 
+<link rel="stylesheet" type="text/css" href="/static/css/chosen.css">
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/static/scripts/chosen.jquery.js"></script>
+<script type="text/javascript" src="/static/scripts/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="/static/scripts/tablesorter.js"></script>
 <script type="text/javascript">
 $(document).ready(function() 
-    { 
-        $("#wishTable").tablesorter(); 
-    } 
+{
+$(".chzn-select").chosen();
+$("#wishTable").tablesorter(); 
+} 
 ); 
 </script>
+
 <script type='text/javascript'>
   function showHide(divId)
   {
@@ -24,50 +32,44 @@ $(document).ready(function()
       else
           document.getElementById(divId).style.display = 'block';
   }
-  </script>
+</script>
+
+<script type='text/javascript'>
+function confirmDelete(delUrl) {
+  if (confirm("Вы собираетесь удалить эту запись?!")) {
+    document.location = delUrl;
+  }
+}
+</script>
 
 <title>Laborders</title>
 </head>
-
 <body>
-
 {% if user %}
 <div class="hdr">
 Здравствуйте, {{ user.first_name }}!
 <a href='/logout'><img src='/static/picts/out.png' title='Выйти' width=40></a>
 {% block links %}
 <br><a href='/contact'>[Обратная связь]</a>
-
+  <a href='/reserved'>[Отложенные заказы]</a>
+  <a href='/completed'>[Архив]</a>
 {% endblock %}  
 <br>
 {% block usermessage %}
-
 {% endblock %}
-  Хорошие новости! Нажатием на имя пользователя в таблице<br>
-  можно отображать заказы только этого пользователя. <br>
-  При добавлении нового пожелания в автодополнении теперь отображаются <br>
-  и каталожные номера
 </div>
-
 {% endif %}
-
 <h1>
 {% block title %}
  {{ page_name }}
 {% endblock %}
 </h1>
 
-{% if new %}
+{% if newww %}
   <a href='/new'><img src='/static/picts/add.png' height=60></a>
 {% endif %}
-
-
-
 {% block content %}
 <p>{{ content }}<p>
 {% endblock %}
-
-
 </body>
-
 </html>

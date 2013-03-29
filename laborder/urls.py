@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-  
 
 from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+#from django.views.generic.simple import direct_to_template
 from django.conf import settings
 import os
 
@@ -20,14 +20,16 @@ urlpatterns = patterns(
     (r'^wishes/(?P<status>\w+)?/?$', views.wishes),
     (r'^extsearch/', views.extsearch),
     (r'^logout/', 'logout'),
-    (r'^simple-autocomplete/', include('simple_autocomplete.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^new/', 'new'),
+    (r'^reserved', 'reservedwishes'),
+    (r'^completed', 'completedwishes'),
     (r'^addstuff/', 'addstuff'),
     (r'^wish/(?P<userid>\d+)/$', 'userwish'),
     (r'^delete/(?P<num>\d+)/$', 'delete'),
     (r'^edit/(?P<num>\d+)/$', 'edit'),
+    (r'^status/(?P<st>\w+)/$', 'showstatus'),
     (r'^contact/', 'contact'),
     #(r'^todo/', include('todo.urls')),
     # Uncomment the next line to enable the admin:

@@ -9,7 +9,6 @@
 {% if back %}
 <a href='/'>Назад</a>
 {% endif %}
-
 <p>
 <form action="." method='get'>
 <input type='text' name='ssearch'></input>
@@ -35,8 +34,8 @@
       <th>Ссылка</th>
       <th>Комментарий</th>
       <th>Статус</th>
-      <th>Цена за ед.</th>
-      <th>Всего</th>
+      <th class="{sorter: 'currency'}">Цена за ед.</th>
+      <th class="{sorter: 'currency'}">Всего</th>
       <th>Дата заказа</th>
       <th></th>
     </tr>
@@ -50,16 +49,22 @@
     <td>{{ item.stuff.cat_num }} </td>
     <td>{{item.stuff.package }}</td>
     <td>{{ item.pieces }}</td>
-    <td>{% if user.username == item.user.username %} {{ item.user.first_name }}</a> {% else %} {% if user.is_staff %} <a href='/wish/{{ item.user.first_name }}'>{{ item.user.first_name }}</a>  {% endif %} {% endif %}</td>
-    <td>{% if item.urgent %}<div style="display:none">1</div>{% endif %}</td>
+    <td>
+      {% if user.username == item.user.username or user.is_staff %}
+      <a href='/wish/{{ item.user.id }}'>{{ item.user.first_name }}</a>
+      {% else %}
+      {{ item.user.first_name }}
+      {% endif %}
+    </td>
+    <td>{% if item.urgent %}<div style="display:none">1</div><img src='/static/picts/urgent.png' width=20>{% endif %}</td>
     <td>{% if item.stuff.man_site %} {{ item.stuff.man_site|urlizetrunc:20}} {% endif %} </td>
     <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
-    <td>{{ item.get_status_display }}</td>
+    <td><a href='/status/{{ item.status }}'>{{ item.get_status_display }}</a></td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
-    <td>{{ item.order_date|date:'d/m/y' }}</td>
+    <td>{{ item.order_date|date:'m/d/Y' }}</td>
     <td>{% if user == item.user or user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
-    <td>{% if user == item.user or user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
+    <td>{% if user == item.user or user.is_staff %} <a href='javascript:confirmDelete("/delete/{{ item.id }}")'>Удалить</a>{% endif %}</td>
   </tr>
   {% endfor %}
   
@@ -75,12 +80,12 @@
     <td>{% if item.urgent %}<div style="display:none">1</div><img src='/static/picts/urgent.png' width=20>{% endif %}</td>
     <td>{% if item.stuff.man_site %} {{ item.stuff.man_site|urlizetrunc:20 }} {% endif %} </td>
     <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
-    <td>{{ item.get_status_display }}</td>
+    <td><a href='/status/{{ item.status }}'>{{ item.get_status_display }}</a></td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
-    <td>{{ item.order_date|date:'d/m/y' }}</td>
+    <td>{{ item.order_date|date:'m/d/Y' }}</td>
     <td>{% if user.is_staff %} <a href='/edit/{{ item.id }}'>Править</a>{% endif %}</td>
-    <td>{% if user.is_staff %} <a href='/delete/{{ item.id }}'>Удалить</a>{% endif %}</td>
+    <td>{% if user.is_staff %} <a href='javascript:confirmDelete("/delete/{{ item.id }}")'>Удалить</a>{% endif %}</td>
   </tr>
     {% endfor %}
   </tbody>

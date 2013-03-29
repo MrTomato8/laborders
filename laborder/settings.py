@@ -13,10 +13,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'laborders',                      # Or path to database file if using sqlite3.
-        'USER': 'annndrey',#'www-data',                      # Not used with sqlite3.
-        'PASSWORD': 'andreygon',#'Iej6Aew9',                  # Not used with sqlite3.
+        'USER': 'www-data',                      # Not used with sqlite3.
+        'PASSWORD': 'Iej6Aew9',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -46,24 +46,24 @@ USE_I18N = True
 USE_L10N = True
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-MEDIA_ROOT = os.path.join(SITE_ROOT, 'static')
-MEDIA_URL = '/static/'
+#MEDIA_ROOT = os.path.join(SITE_ROOT, 'static')
+#MEDIA_URL = '/static/'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-#MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media')
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-#MEDIA_URL = '/media/'
+STATIC_URL = '/static/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media", "/media/".
 #ADMIN_MEDIA_ROOT = os.path.join(SITE_ROOT, 'admin-media')
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-
+#STATIC_URL = '/static/admin/'
+#ADMIN_MEDIA_PREFIX = '/static/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'or8$*dk_gctx0t7j$(bh%w*r6)z@$h7qb&g%ra7@36gg4ahbma'
 
@@ -80,7 +80,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -94,20 +94,23 @@ TEMPLATE_DIRS = (
 
 LOGIN_URL = '/'
 
-SIMPLE_AUTOCOMPLETE_MODELS = ('orders.stuff',)
-#SIMPLE_AUTOCOMPLETE = {'orders.stuff':{'max_items':10},}
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    #'django.contrib.staticfiles',
     'django.contrib.sessions',
-    'simple_autocomplete',
     #'todo',
     #'django.contrib.sites',
-    #'django.contrib.messages',
+    'django.contrib.messages',
     'orders',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'simple_autocomplete',
+    'django.contrib.staticfiles',
+    'widget_tweaks',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+SIMPLE_AUTOCOMPLETE_MODELS = ('orders.stuff',)

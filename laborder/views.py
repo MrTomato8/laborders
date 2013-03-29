@@ -2,15 +2,17 @@
 
 from numpy import array
 from django.shortcuts import render_to_response
-from orders.forms import ContactForm, WishForm, StuffForm
 from django.core.mail import send_mail, mail_admins
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
-from orders.models import Stuff, Wish
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.utils import simplejson
+from django.http import HttpResponse
+from orders.models import Stuff, Wish
+from orders.forms import ContactForm, WishForm, StuffForm
 
 def main(request, template_name='login.html'):
     c = {}
@@ -107,13 +109,14 @@ def wishes(request, status):
             return render_to_response("wishes.html", c)
 
     wish_user = Wish.objects.filter(user=request.user.id)
-    wish_other = Wish.objects.exclude(user=request.user.id)
+    wish_user = wish_user.exclude(status='B').exclude(status='C')
+    wish_other = Wish.objects.exclude(user=request.user.id).exclude(status='B').exclude(status='C')
     st_dict = {'delete':u'удалена', 'edit':u'изменена', 'add':u'добавлена'}
     if status is not False:
         st = st_dict.get(status, False)
     else:
         st = False
-    c = {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False, 'new':True}
+    c = {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False, 'newww':True}
     c.update(csrf(request))
     return render_to_response("wishes.html", c)
 
@@ -129,9 +132,22 @@ def delete(request, num):
 def userwish(request, userid):
     w = Wish.objects.filter(user=userid)
     uname = User.objects.get(id=userid)
-    c = {'wishes':w, 'page_name':u'Список заказов пользователя %s' % uname.first_name, 'user':request.user, 'status':False, 'new':True, 'back':True}
+    c = {'wishes':w, 'page_name':u'Заказы пользователя %s' % uname.first_name, 'user':request.user, 'status':False, 'newww':True, 'back':True}
     return render_to_response("wishes.html", c)
 
+@login_required()
+def showstatus(request, st):
+    w = Wish.objects.filter(status=st)
+    wlist = list(w)
+    if len(wlist) > 0:
+        statusname = wlist[0].get_status_display()
+        c = {'wishes':w, 'page_name':u'Заказы со статусом "%s"' % statusname, 'user':request.user, 'status':False, 'newww':True, 'back':True}
+        
+    else:
+        w = Wish.objects.all()
+        c = {'wishes':w, 'page_name':u'Статуса "%s" нет' % st, 'user':request.user, 'status':False, 'newww':True, 'back':True}
+        
+    return render_to_response("wishes.html", c)
 
 @login_required()
 def edit(request, num):
@@ -144,7 +160,9 @@ def edit(request, num):
         f.save()
 
         return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'user':request.user, 'title':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'page_name':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id, 'stuff_id':wish.stuff_id}
+    stuff_name = unicode(wish.stuff.name_rus)
+    c = {'form':form, 'user':request.user, 'title':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'page_name':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id, 'stuff_id':wish.stuff_id, 'stuff_name':stuff_name}
+    request.session['stuff_name'] = stuff_name
     c.update(csrf(request))
     return render_to_response("add.html", c)
 
@@ -159,21 +177,59 @@ def back(url):
 @login_required()
 def addstuff(request):
     form = StuffForm()
+
     if request.method == 'POST':
         f = StuffForm(request.POST, instance=Stuff())
-        new_stuff = f.save()
-        return HttpResponseRedirect('/new')
-    c = {'form':form, 'user':request.user, 'back':back(request.path), 'page_name':u'Добавление в список', 'modif':'Добавить'}
-    c.update(csrf(request))
-    return render_to_response("add.html", c)
+        if f.is_valid():
+            new_stuff = f.save()
+            #тут надо не перенаправлять, а возвращать форму добавления нового пожелания, где оборудование заполнено 
+            #только что добавленными данными. 
+            request.session['stuff'] = new_stuff.id
+            #c = {'form':wishform, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
+            #c.update(csrf(request))
+            return HttpResponseRedirect("/new")
+
+        else:
+            c = {'form':f, 'user':request.user, 'back':back(request.path), 'page_name':u'Добавление в список', 'modif':'Добавить'}
+            c.update(csrf(request))
+            return render_to_response("add.html", c)
+    else:
+        c = {'form':form, 'user':request.user, 'back':back(request.path), 'page_name':u'Добавление в список', 'modif':'Добавить'}
+        c.update(csrf(request))
+        return render_to_response("add.html", c)
+
+@login_required()
+def reservedwishes(request):
+    w = Wish.objects.filter(status='B', user=request.user.id)
+    c = {'wishes':w, 'page_name':u'Отложенные заказы', 'user':request.user, 'status':False, 'newww':True, 'back':True}
+    return render_to_response("wishes.html", c)
+    
+@login_required()
+def completedwishes(request):
+    w = Wish.objects.filter(status='C')
+    c = {'wishes':w, 'page_name':u'Выполненные заказы', 'user':request.user, 'status':False, 'newww':True, 'back':True}
+    return render_to_response("wishes.html", c)
 
 @login_required()
 def new(request):
-    form = WishForm()
+    stuff_id =  request.session.get("stuff")
+    stuff_name = request.session.get("stuff_name")
+    if stuff_id:
+        form = WishForm(initial = {'stuff':stuff_id})
+    else:
+        form = WishForm()
+
     if request.method == 'POST':
-        f = WishForm(request.POST, instance=Wish())
-        new_wish = f.save()
-        return HttpResponseRedirect('/wishes')
-    c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
-    c.update(csrf(request))
-    return render_to_response("add.html", c)
+        form = WishForm(request.POST, instance=Wish())
+        if form.is_valid():
+            new_wish = form.save()
+            return HttpResponseRedirect('/wishes')
+        else:
+            c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
+            c.update(csrf(request))
+            return render_to_response("add.html", c)
+
+    else:
+        c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
+        c.update(csrf(request))
+        return render_to_response("add.html", c)
