@@ -29,6 +29,7 @@ urlpatterns = patterns(
     (r'^wish/(?P<userid>\d+)/$', 'userwish'),
     (r'^delete/(?P<num>\d+)/$', 'delete'),
     (r'^edit/(?P<num>\d+)/$', 'edit'),
+    (r'^history/(?P<num>\d+)/$', 'showhistory'),
     (r'^status/(?P<st>\w+)/$', 'showstatus'),
     (r'^contact/', 'contact'),
     #(r'^todo/', include('todo.urls')),

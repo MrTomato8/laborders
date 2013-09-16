@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.utils import simplejson
 from django.http import HttpResponse
-from orders.models import Stuff, Wish
+from orders.models import Stuff, Wish, Event
 from orders.forms import ContactForm, WishForm, StuffForm
 
 def main(request, template_name='login.html'):
@@ -149,17 +149,31 @@ def showstatus(request, st):
         
     return render_to_response("wishes.html", c)
 
+@login_required
+def showhistory(request, num):
+    e = Event.objects.filter(wish=num)
+    w = Wish.objects.get(id=num)
+    c = {'events':e, 'page_name':u'История заказа [{0}] от {1}'.format(w.stuff.name_rus, w.order_date), 'user':request.user, 'status':False, 'newww':False, 'back':True}
+    return render_to_response('history.html', c)
+
 @login_required()
 def edit(request, num):
     wish = Wish.objects.get(id=num)
-
     form = WishForm(instance=wish)
+    status_old = wish.status
 
     if request.method == 'POST':
         f = WishForm(request.POST, instance=wish)
-        f.save()
-
-        return HttpResponseRedirect('/wishes')
+        
+        if f.is_valid():
+            f.save()
+            #и тут, если в форме все правильно, добавляем запись об изменении статуса в таблицу.
+            #if wish.status != :
+            status_new = f.cleaned_data['status']
+            newevent = Event(wish=wish, oldstatus=status_old, newstatus=status_new, user=request.user)
+            newevent.save()
+            return HttpResponseRedirect('/wishes')
+        
     stuff_name = unicode(wish.stuff.name_rus)
     c = {'form':form, 'user':request.user, 'title':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'page_name':u'Правка записи {0}, русское название: {1}'.format(num, wish.stuff.name_rus), 'modif':'Изменить', 'wstat':wish.status, 'uid':wish.user.id, 'stuff_id':wish.stuff_id, 'stuff_name':stuff_name}
     request.session['stuff_name'] = stuff_name

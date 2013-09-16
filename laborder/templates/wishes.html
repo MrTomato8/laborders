@@ -34,6 +34,7 @@
       <th>Ссылка</th>
       <th>Комментарий</th>
       <th>Статус</th>
+      <th>История</th>
       <th class="{sorter: 'currency'}">Цена за ед.</th>
       <th class="{sorter: 'currency'}">Всего</th>
       <th>Дата заказа</th>
@@ -60,6 +61,7 @@
     <td>{% if item.stuff.man_site %} {{ item.stuff.man_site|urlizetrunc:20}} {% endif %} </td>
     <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
     <td><a href='/status/{{ item.status }}'>{{ item.get_status_display }}</a></td>
+    <td><a href='/history/{{ item.id }}'><img src='/static/picts/history.png' width=20></a></td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'m/d/Y' }}</td>
@@ -81,6 +83,7 @@
     <td>{% if item.stuff.man_site %} {{ item.stuff.man_site|urlizetrunc:20 }} {% endif %} </td>
     <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
     <td><a href='/status/{{ item.status }}'>{{ item.get_status_display }}</a></td>
+    <td><a href='/history/{{ item.id }}'><img src='/static/picts/history.png' width=20></a></td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
     <td>{{ item.order_date|date:'m/d/Y' }}</td>

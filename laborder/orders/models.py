@@ -104,4 +104,12 @@ class Wish(models.Model):
     def __unicode__(self):
         return u"Пожелание №{0}, {1} [ {2} ]".format(self.id, self.stuff, self.get_status_display())
 
-
+class Event(models.Model):
+    """
+    Класс для записи изменений статусов заказов
+    """
+    wish = models.ForeignKey(Wish, verbose_name="заказ")
+    oldstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='N')
+    newstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='N')
+    user = models.ForeignKey(User, verbose_name="пользователь")
+    order_date = models.DateTimeField("дата заказа", auto_now=True)
