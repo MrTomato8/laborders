@@ -23,18 +23,18 @@ currency_choices = (
 # R - отклонено, красненькая
 
 status_choices = (
-    ('B', 'Отложено'),
-    ('N', 'Новое'), #New
+    ('5', 'Отложено'),
+    ('0', 'Новое'), #New
     #('D', 'Отложено'), #Delayed
     #('P', 'В рассмотрении'), #Pending лишнее
     #('A', 'Одобрено'), #Approved
-    ('R', 'Отклонено'), #Rejected
-    ('O', 'Заказано'),
+    ('4', 'Отклонено'), #Rejected
+    ('1', 'Заказано'),
     #('O', 'Ожидание счета'), #waiting for Order лишнее
-    ('D', 'Поставлено'), #waiting for Delivery лишнее
+    ('2', 'Поставлено'), #waiting for Delivery лишнее
     #('E', 'Выдано пользователю'), #partially Received лишнее
     # и добавить "отложен"
-    ('C', 'Выполнено'), #Completed 
+    ('3', 'Выполнено'), #Completed 
     )
 #группы объектов
 group_choices = (
@@ -94,7 +94,7 @@ class Wish(models.Model):
     order_date = models.DateTimeField("дата заказа", auto_now=True)
     user = models.ForeignKey(User, verbose_name="пользователь")
     urgent = models.BooleanField("срочно")
-    status = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='N')
+    status = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='1')
     comment = models.TextField("комментарий", blank=True, null=True)
 
     def total(self):
@@ -113,7 +113,7 @@ class Event(models.Model):
     Класс для записи изменений статусов заказов
     """
     wish = models.ForeignKey(Wish, verbose_name="заказ")
-    oldstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='N')
-    newstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='N')
+    oldstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='1')
+    newstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='1')
     user = models.ForeignKey(User, verbose_name="пользователь")
     order_date = models.DateTimeField("дата заказа", auto_now=True)

@@ -59,7 +59,7 @@
     <td>{% if item.urgent %}<div style="display:none">1</div><img src='/static/picts/urgent.png' width=20>{% endif %}</td>
     <td>{% if item.stuff.man_site %} <a href='{{ item.stuff.man_site }}' title='{{ item.stuff.man_site }}'><img src='/static/picts/link.png' width=20></a> {% endif %} </td>
     <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
-    <td><a href='/status/{{ item.status }}' title='{{ item.get_status_display }}'><img src='/static/picts/status{{ item.status }}.png' height=12></a></td>
+    <td><font color='white'>{{ item.status }}</font> <a href='/status/{{ item.status }}' title='{{ item.get_status_display }}'><img src='/static/picts/status{{ item.status }}.png' height=12></a></td>
     <td><a href='/history/{{ item.id }}'><img src='/static/picts/history.png' width=20></a></td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>
@@ -80,7 +80,7 @@
     <td>{% if item.urgent %}<div style="display:none">1</div><img src='/static/picts/urgent.png' width=20>{% endif %}</td>
     <td>{% if item.stuff.man_site %} <a href='{{ item.stuff.man_site }}' title='{{ item.stuff.man_site }}'><img src='/static/picts/link.png' width=20></a> {% endif %} </td>
     <td>{% if item.comment|length > 0 %}<a href="javascript:;" onclick="showHide('comment{{item.id}}');"><img src='/static/picts/asterisk_orange.png' width=20></a><div id="comment{{item.id}}" style="display:none">{{ item.comment }}</div>{% endif %}</td>
-    <td><a href='/status/{{ item.status }}' title='{{ item.get_status_display }}'><img src='/static/picts/status{{ item.status }}.png' height=12></a></td>
+    <td><font color='white'>{{ item.status }}</font><a href='/status/{{ item.status }}' title='{{ item.get_status_display }}'><img src='/static/picts/status{{ item.status }}.png' height=12></a></td>
     <td><a href='/history/{{ item.id }}'><img src='/static/picts/history.png' width=20></a></td>
     <td>{{ item.price_man }} {{ item.currency_man }}</td>
     <td>{{ item.total }} {{ item.currency_man }}</td>

@@ -108,8 +108,8 @@ def wishes(request, status):
             return render_to_response("wishes.html", c)
     
     wish_user = Wish.objects.filter(user=request.user.id)
-    wish_user = wish_user.exclude(status='B').exclude(status='C')
-    wish_other = Wish.objects.exclude(user=request.user.id).exclude(status='B').exclude(status='C')
+    wish_user = wish_user.exclude(status='5').exclude(status='3')
+    wish_other = Wish.objects.exclude(user=request.user.id).exclude(status='5').exclude(status='3')
     st_dict = {'delete':u'удалена', 'edit':u'изменена', 'add':u'добавлена'}
 
     if status is not False:
@@ -219,13 +219,13 @@ def addstuff(request):
 
 @login_required()
 def reservedwishes(request):
-    w = Wish.objects.filter(status='B', user=request.user.id)
+    w = Wish.objects.filter(status='5', user=request.user.id)
     c = {'wishes':w, 'page_name':u'Отложенные заказы', 'user':request.user, 'status':False, 'newww':True, 'back':True}
     return render_to_response("wishes.html", c)
     
 @login_required()
 def completedwishes(request):
-    w = Wish.objects.filter(status='C')
+    w = Wish.objects.filter(status='3')
     c = {'wishes':w, 'page_name':u'Выполненные заказы', 'user':request.user, 'status':False, 'newww':True, 'back':True}
     return render_to_response("wishes.html", c)
 
@@ -244,7 +244,7 @@ def new(request):
             #Вначале сохраняем форму, добавляем новое пожелание
             new_wish = form.save()
             #а потом добавляем его в историю
-            newevent = Event(wish=new_wish, oldstatus=' ', newstatus='N', user=request.user)
+            newevent = Event(wish=new_wish, oldstatus=' ', newstatus='0', user=request.user)
             newevent.save()
             return HttpResponseRedirect('/wishes')
         else:
