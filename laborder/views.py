@@ -38,7 +38,6 @@ def main(request, template_name='login.html'):
         else:
             return render_to_response(template_name, c)
 
-
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
@@ -107,25 +106,31 @@ def wishes(request, status):
             wish_list = Wish.objects.filter(qset)
             c = {'wishes':wish_list, 'page_name':u'Расширенный поиск %s' % request.GET, 'user':request.user, 'status':False, 'back':True}
             return render_to_response("wishes.html", c)
-
+    
     wish_user = Wish.objects.filter(user=request.user.id)
     wish_user = wish_user.exclude(status='B').exclude(status='C')
     wish_other = Wish.objects.exclude(user=request.user.id).exclude(status='B').exclude(status='C')
     st_dict = {'delete':u'удалена', 'edit':u'изменена', 'add':u'добавлена'}
+
     if status is not False:
         st = st_dict.get(status, False)
     else:
         st = False
+
     c = {'wishes':wish_user, 'other_wishes':wish_other, 'page_name':u'Список заказов', 'user':request.user, 'status':False, 'newww':True}
     c.update(csrf(request))
+
     return render_to_response("wishes.html", c)
 
 @login_required()
 def delete(request, num):
     #delete object
     #return httpredirect /wishes 
+    e = Event.objects.filter(wish=num)
+    e.delete()
     w = Wish.objects.get(id=num)
     w.delete()
+    
     return HttpResponseRedirect('/wishes')
 
 @login_required()
@@ -236,7 +241,11 @@ def new(request):
     if request.method == 'POST':
         form = WishForm(request.POST, instance=Wish())
         if form.is_valid():
+            #Вначале сохраняем форму, добавляем новое пожелание
             new_wish = form.save()
+            #а потом добавляем его в историю
+            newevent = Event(wish=new_wish, oldstatus=' ', newstatus='N', user=request.user)
+            newevent.save()
             return HttpResponseRedirect('/wishes')
         else:
             c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
