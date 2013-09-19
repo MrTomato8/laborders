@@ -94,7 +94,7 @@ class Wish(models.Model):
     order_date = models.DateTimeField("дата заказа", auto_now=True)
     user = models.ForeignKey(User, verbose_name="пользователь")
     urgent = models.BooleanField("срочно")
-    status = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='1')
+    status = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='0')
     comment = models.TextField("комментарий", blank=True, null=True)
 
     def total(self):
@@ -113,7 +113,7 @@ class Event(models.Model):
     Класс для записи изменений статусов заказов
     """
     wish = models.ForeignKey(Wish, verbose_name="заказ")
-    oldstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='1')
-    newstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='1')
+    oldstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='0')
+    newstatus = models.CharField("статус пожелания", max_length=1, choices=status_choices, default='0')
     user = models.ForeignKey(User, verbose_name="пользователь")
     order_date = models.DateTimeField("дата заказа", auto_now=True)

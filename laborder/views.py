@@ -209,11 +209,11 @@ def addstuff(request):
             return HttpResponseRedirect("/new")
 
         else:
-            c = {'form':f, 'user':request.user, 'back':back(request.path), 'page_name':u'Добавление в список', 'modif':'Добавить'}
+            c = {'form':f, 'user':request.user, 'back':'/new', 'page_name':u'Добавление в список', 'modif':'Добавить'}
             c.update(csrf(request))
             return render_to_response("add.html", c)
     else:
-        c = {'form':form, 'user':request.user, 'back':back(request.path), 'page_name':u'Добавление в список', 'modif':'Добавить'}
+        c = {'form':form, 'user':request.user, 'back':'/new', 'page_name':u'Добавление в список', 'modif':'Добавить'}
         c.update(csrf(request))
         return render_to_response("add.html", c)
 
@@ -248,11 +248,11 @@ def new(request):
             newevent.save()
             return HttpResponseRedirect('/wishes')
         else:
-            c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
+            c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':'/', 'modif':'Добавить', 'wstat':"0"}
             c.update(csrf(request))
             return render_to_response("add.html", c)
 
     else:
-        c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':back(request.path), 'modif':'Добавить', 'wstat':"N"}
+        c = {'form':form, 'user':request.user, 'page_name':u'Новое пожелание', 'back':'/', 'modif':'Добавить', 'wstat':"0"}
         c.update(csrf(request))
         return render_to_response("add.html", c)

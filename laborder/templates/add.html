@@ -6,7 +6,8 @@
 
 {% block content %}
 <div class="content">
-<a href='/{{ back }}'><img src='/static/picts/back.png' height=60></a>
+
+<a href='{{ back }}'><img src='/static/picts/back.png' height=60></a>
 
 {% if form.errors %}
   <p>Произошла ошибка :( </p>
@@ -18,7 +19,7 @@
   {% endif %}
   {% endfor %}
   {% endif %}
-  
+
 <form action='' method="POST">
 
 {% if user.is_staff %}
@@ -66,7 +67,9 @@
 <div class='wish-v'>
   {% if field.label == "Оборудование" %}
   {{ field|attr:"style:width:200px"|attr:"data-placeholder:Выберите оборудование"|add_class:"chzn-select" }}
-  
+
+  {% elif field.label == "Группа" %}
+  {{ field|attr:"style:width:200px"|attr:"data-placeholder:Выберите группу"|add_class:"chzn-select" }}
   {% elif field.label == "Комментарий" %}
   {{ field|attr:"cols:15" }}
   {% else %}
